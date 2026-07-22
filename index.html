@@ -33,7 +33,7 @@
   "openingHoursSpecification": [
     {"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],"opens":"08:00","closes":"16:00"}
   ],
-  "medicalSpecialty": ["Physical Therapy","Occupational Therapy","Sports Rehabilitation","Pediatric PT"]
+  "medicalSpecialty": ["Physical Therapy","Occupational Therapy","Pediatric Rehabilitation"]
 }
 </script>
 
@@ -234,9 +234,22 @@
     align-items: center;
     gap: 12px;
     font-family: var(--font-heading);
-    font-size: 1.45rem;
+    font-size: 1.5rem;
     font-weight: 800;
-    color: var(--color-deep-forest);
+    color: var(--color-emerald-ink);
+  }
+  .logo span {
+    color: var(--color-emerald-ink);
+    letter-spacing: -0.01em;
+  }
+  .brand-logo-img {
+    height: 46px;
+    width: auto;
+    max-width: 200px;
+    object-fit: contain;
+    border-radius: var(--radius-sm);
+    display: inline-block;
+    box-shadow: var(--shadow-sm);
   }
   .logo-icon {
     width: 42px;
@@ -356,45 +369,90 @@
     border: 1px solid rgba(255, 255, 255, 0.15);
   }
 
-  /* Shadcn Quick Booking Selector Bar */
+  /* Shadcn Quick Booking Selector Bar - Ultra Seamless Desktop & Mobile */
   .booking-bar {
     background: #ffffff;
     border-radius: var(--radius-lg);
-    padding: 16px 24px;
-    box-shadow: var(--shadow-lg);
-    border: 1px solid var(--border-light);
+    padding: 18px 28px;
+    box-shadow: 0 12px 32px -8px rgba(3, 45, 34, 0.12), 0 0 0 1px var(--border-light);
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr auto;
-    gap: 16px;
+    grid-template-columns: minmax(220px, 1.2fr) minmax(220px, 1.2fr) minmax(170px, 1fr) auto;
+    gap: 20px;
     align-items: center;
-    margin-top: 24px;
+    margin-top: 36px;
+    width: 100%;
+    transition: var(--transition);
+  }
+  .booking-bar:hover {
+    box-shadow: 0 16px 40px -8px rgba(3, 45, 34, 0.16), 0 0 0 1px var(--color-jade);
   }
   .select-group {
     display: flex;
     flex-direction: column;
-    gap: 4px;
-    padding: 4px 12px;
+    gap: 6px;
+    padding: 4px 16px 4px 8px;
     border-right: 1px solid var(--border-light);
+    min-width: 0;
   }
   .select-group:last-of-type {
     border-right: none;
   }
   .select-label {
-    font-size: 0.78rem;
-    font-weight: 700;
+    font-size: 0.76rem;
+    font-weight: 800;
+    letter-spacing: 0.05em;
     text-transform: uppercase;
     color: var(--color-emerald-ink);
     display: flex;
     align-items: center;
-    gap: 4px;
+    gap: 6px;
+    white-space: nowrap;
+  }
+  .select-label i {
+    width: 15px;
+    height: 15px;
+    color: var(--color-jade);
   }
   .select-input {
     width: 100%;
     background: transparent;
+    font-weight: 700;
+    color: var(--color-deep-forest);
+    font-size: 0.96rem;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 4px 0;
+  }
+  select.select-input {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23064E3B' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 4px center;
+    padding-right: 24px;
+  }
+  select.select-input option {
     font-weight: 600;
     color: var(--text-dark);
-    font-size: 0.95rem;
-    cursor: pointer;
+    padding: 10px;
+  }
+  input[type="date"].select-input {
+    font-family: inherit;
+    color: var(--color-deep-forest);
+  }
+  .booking-btn {
+    white-space: nowrap;
+    padding: 14px 28px;
+    font-size: 0.98rem;
+    font-weight: 700;
+    border-radius: var(--radius-full);
+    box-shadow: 0 4px 14px rgba(6, 78, 59, 0.25);
+    flex-shrink: 0;
   }
 
   /* Dark Emerald Experience Banner */
@@ -553,42 +611,37 @@
   }
   .bm-dot {
     position: absolute;
-    width: 22px;
-    height: 22px;
+    width: 26px;
+    height: 26px;
     border-radius: 50%;
-    background: rgba(255, 255, 255, 0.96);
+    background: #ffffff;
     border: 2px solid var(--color-emerald-ink);
-    box-shadow: 0 2px 8px rgba(3, 45, 34, 0.3);
+    box-shadow: 0 2px 8px rgba(3, 45, 34, 0.35);
     cursor: pointer;
     transform: translate(-50%, -50%);
     display: flex;
     align-items: center;
     justify-content: center;
+    font-family: var(--font-heading);
+    font-size: 0.8rem;
+    font-weight: 800;
+    color: var(--color-emerald-ink);
     transition: var(--transition);
     z-index: 10;
   }
-  .bm-dot .bm-core {
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    background: var(--color-emerald-ink);
-    transition: var(--transition);
-  }
   .bm-dot:hover {
-    transform: translate(-50%, -50%) scale(1.15);
+    transform: translate(-50%, -50%) scale(1.18);
+    background: var(--color-champagne);
     border-color: var(--color-antique-gold);
-    box-shadow: 0 0 0 4px rgba(201, 162, 75, 0.3), 0 4px 12px rgba(3, 45, 34, 0.35);
+    color: var(--color-deep-forest);
+    box-shadow: 0 0 0 4px rgba(201, 162, 75, 0.35), 0 4px 12px rgba(3, 45, 34, 0.4);
   }
   .bm-dot.active {
-    transform: translate(-50%, -50%) scale(1.2);
+    transform: translate(-50%, -50%) scale(1.22);
     background: var(--color-emerald-ink);
     border-color: var(--color-antique-gold);
-    box-shadow: 0 0 0 5px rgba(201, 162, 75, 0.45), 0 6px 16px rgba(3, 45, 34, 0.4);
-  }
-  .bm-dot.active .bm-core {
-    background: var(--color-champagne);
-    width: 8px;
-    height: 8px;
+    color: var(--color-champagne);
+    box-shadow: 0 0 0 5px rgba(201, 162, 75, 0.45), 0 6px 16px rgba(3, 45, 34, 0.45);
   }
   .bm-detail-card {
     background: #ffffff;
@@ -800,11 +853,14 @@
     height: 280px;
     width: 100%;
     overflow: hidden;
+    background: linear-gradient(135deg, var(--color-champagne) 0%, rgba(46, 155, 124, 0.15) 100%);
+    position: relative;
   }
   .team-img-box img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: top center;
     transition: var(--transition);
   }
   .team-card:hover .team-img-box img {
@@ -1006,12 +1062,31 @@
   }
 
   /* Responsive Design Breakpoints */
-  @media (max-width: 1024px) {
+  @media (max-width: 1100px) {
     .hero-grid {
       grid-template-columns: 1fr;
     }
     .booking-bar {
       grid-template-columns: 1fr 1fr;
+      gap: 16px 24px;
+      padding: 20px;
+      margin-top: 28px;
+    }
+    .select-group {
+      border-right: none;
+      border-bottom: 1px solid var(--border-light);
+      padding-bottom: 12px;
+    }
+    .select-group:nth-child(2) {
+      border-bottom: 1px solid var(--border-light);
+    }
+    .select-group:nth-child(3) {
+      border-bottom: none;
+    }
+    .booking-btn {
+      grid-column: 1 / -1;
+      width: 100%;
+      margin-top: 8px;
     }
     .dark-banner-grid {
       grid-template-columns: 1fr;
@@ -1021,6 +1096,28 @@
     }
     .footer-grid {
       grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .booking-bar {
+      grid-template-columns: 1fr;
+      gap: 14px;
+      padding: 18px 16px;
+      margin-top: 24px;
+    }
+    .select-group {
+      border-right: none;
+      border-bottom: 1px solid var(--border-light);
+      padding: 6px 4px 12px 4px;
+    }
+    .select-group:last-of-type {
+      border-bottom: none;
+    }
+    .booking-btn {
+      grid-column: span 1;
+      width: 100%;
+      padding: 14px 20px;
     }
   }
 
@@ -1081,13 +1178,8 @@
     padding: 64px 0 32px;
     background: var(--color-warm-white);
   }
-  .treat-header-flex {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    gap: 40px;
+  .treat-header {
     margin-bottom: 36px;
-    flex-wrap: wrap;
   }
   .treat-subtag {
     font-size: 0.85rem;
@@ -1104,12 +1196,13 @@
     font-weight: 800;
     color: var(--color-deep-forest);
     line-height: 1.15;
+    margin-bottom: 14px;
   }
   .treat-header-desc {
-    max-width: 480px;
-    font-size: 1.02rem;
+    max-width: 760px;
+    font-size: 1.08rem;
     color: var(--text-muted);
-    line-height: 1.6;
+    line-height: 1.65;
   }
   .treat-grid {
     display: grid;
@@ -1343,10 +1436,8 @@
     <div class="container">
       <nav class="navbar">
         <a href="#" class="logo">
-          <div class="logo-icon">
-            <i data-lucide="activity"></i>
-          </div>
-          <span>FlexTend PT</span>
+          <img src="https://res.cloudinary.com/zylwakez/image/upload/v1784727300/469096100_122187442646236134_3866953868595262826_n_cbkuep.jpg" alt="FlexTend Physical Therapy Clinic Logo" class="brand-logo-img">
+          <span>FlexTend</span>
         </a>
 
         <ul class="nav-links">
@@ -1389,42 +1480,6 @@
               <p class="hero-description">
                 Licensed physical & occupational therapy clinicians dedicated to helping you recover strength, mobility, and pain-free movement. New patient evaluations available within 48 hours.
               </p>
-
-              <!-- Shadcn Quick Booking Bar -->
-              <div class="booking-bar">
-                <div class="select-group">
-                  <span class="select-label">
-                    <i data-lucide="stethoscope"></i> Select Service
-                  </span>
-                  <select class="select-input" id="quick-service">
-                    <option value="Physical Therapy">Physical Therapy Evaluation</option>
-                    <option value="Occupational Therapy">Occupational Therapy</option>
-                    <option value="Sports Rehabilitation">Sports Rehab & Mobility</option>
-                    <option value="Pediatric Therapy">Pediatric Rehabilitation</option>
-                  </select>
-                </div>
-
-                <div class="select-group">
-                  <span class="select-label">
-                    <i data-lucide="map-pin"></i> Clinic Location
-                  </span>
-                  <select class="select-input" id="quick-location">
-                    <option value="Lipa City Main Clinic">San Jose Subd., Lipa City</option>
-                    <option value="Home Visit Therapy">Home Visit Service (Batangas)</option>
-                  </select>
-                </div>
-
-                <div class="select-group">
-                  <span class="select-label">
-                    <i data-lucide="calendar"></i> Select Date
-                  </span>
-                  <input type="date" class="select-input" id="quick-date" value="2026-07-25">
-                </div>
-
-                <button class="btn btn-primary" onclick="handleQuickBook()">
-                  Make An Appointment
-                </button>
-              </div>
             </div>
 
             <div class="hero-image-wrap">
@@ -1437,6 +1492,42 @@
                 </div>
               </div>
             </div>
+          </div>
+
+          <!-- Ultra Seamless Full-Width Quick Booking Bar -->
+          <div class="booking-bar">
+            <div class="select-group">
+              <span class="select-label">
+                <i data-lucide="stethoscope"></i> Select Service
+              </span>
+              <select class="select-input" id="quick-service" aria-label="Select Service">
+                <option value="Physical Therapy">Physical Therapy</option>
+                <option value="Occupational Therapy">Occupational Therapy</option>
+                <option value="Pediatric Rehabilitation">Pediatric Rehabilitation</option>
+              </select>
+            </div>
+
+            <div class="select-group">
+              <span class="select-label">
+                <i data-lucide="map-pin"></i> Clinic Location
+              </span>
+              <select class="select-input" id="quick-location" aria-label="Clinic Location">
+                <option value="Lipa City Main Clinic">San Jose Subd., Lipa City</option>
+                <option value="Home Visit Therapy">Home Visit Service (Batangas)</option>
+              </select>
+            </div>
+
+            <div class="select-group">
+              <span class="select-label">
+                <i data-lucide="calendar"></i> Select Date
+              </span>
+              <input type="date" class="select-input" id="quick-date" value="2026-07-25" aria-label="Select Date">
+            </div>
+
+            <button class="btn btn-primary booking-btn" onclick="handleQuickBook()">
+              <span>Make An Appointment</span>
+              <i data-lucide="arrow-right"></i>
+            </button>
           </div>
         </div>
       </div>
@@ -1478,102 +1569,102 @@
               <!-- Hotspot Interactive Dots over Musculature Figure -->
               <button class="bm-dot active" style="left: 68%; top: 19%;" 
                 data-num="1" 
-                data-title="Neck & Cervical Spine" 
-                data-region="Upper Spine & Neck" 
-                data-desc="Neck pain and headaches often stem from posture, disc irritation, or muscle tension. We restore mobility and calm the nerves that refer pain into the head and arms." 
-                data-cond="Cervical Radiculopathy|Whiplash & Neck Strain|Tension Headaches|Cervical Disc Bulge"
-                onclick="activateBodyDot(this)" aria-label="Neck and Cervical Spine">
-                <span class="bm-core"></span>
+                data-title="Head, Neck & Facial Nerves" 
+                data-region="Neurologic & Spine" 
+                data-desc="Cerebral palsy, Bell's palsy, facial nerve weakness, stroke, and brain injury cases treated with evidence-based PT and OT." 
+                data-cond="Cerebral Palsy|Bell's Palsy|Stroke|Traumatic Brain Injury"
+                onclick="activateBodyDot(this)" aria-label="Head, Neck & Facial Nerves">
+                <span class="bm-num-label">1</span>
               </button>
 
               <button class="bm-dot" style="left: 62%; top: 25%;" 
                 data-num="2" 
-                data-title="Shoulder & Rotator Cuff" 
-                data-region="Upper Extremity" 
-                data-desc="Rotator cuff tendinitis, impingement, and frozen shoulder restrict overhead reaching. We use targeted manual joint mobilization and scapular stabilization exercises." 
-                data-cond="Rotator Cuff Tear|Frozen Shoulder (Adhesive Capsulitis)|Shoulder Impingement|Bicipital Tendinitis"
-                onclick="activateBodyDot(this)" aria-label="Shoulder & Rotator Cuff">
-                <span class="bm-core"></span>
+                data-title="Shoulder & Upper Extremity" 
+                data-region="Musculoskeletal & Orthopedic" 
+                data-desc="Frozen shoulder, upper limb weakness, fractures, and myofascial stiffness treated with evidence-based physical therapy." 
+                data-cond="Frozen Shoulder|Fracture|Myofascial Pain Syndrome|Generalized Body Weakness"
+                onclick="activateBodyDot(this)" aria-label="Shoulder & Upper Extremity">
+                <span class="bm-num-label">2</span>
               </button>
 
               <button class="bm-dot" style="left: 31%; top: 29%;" 
                 data-num="3" 
-                data-title="Upper Back & Scapula" 
-                data-region="Upper Spine" 
-                data-desc="Postural strain, rhomboid trigger points, and thoracic spine stiffness impair breathing and upper body movement. We mobilize joints and release muscle tension." 
-                data-cond="Rhomboid Strain|Thoracic Spine Stiffness|Myofascial Pain Syndrome|Posture Dysfunction"
-                onclick="activateBodyDot(this)" aria-label="Upper Back & Scapula">
-                <span class="bm-core"></span>
+                data-title="Spine & Posture" 
+                data-region="Musculoskeletal & Orthopedic" 
+                data-desc="Scoliosis, spinal alignment, and back pain addressed through posture correction and therapeutic exercise." 
+                data-cond="Scoliosis|Hip, Knee & Back Pain|Myofascial Pain Syndrome|Generalized Body Weakness"
+                onclick="activateBodyDot(this)" aria-label="Spine & Posture">
+                <span class="bm-num-label">3</span>
               </button>
 
               <button class="bm-dot" style="left: 55.5%; top: 50%;" 
                 data-num="4" 
-                data-title="Hand & Wrist" 
-                data-region="Hand & Occupational Therapy" 
-                data-desc="Nerve compression and muscle weakness affect grip and fine motor dexterity. Our hand therapists restore strength, splinting support, and functional independence." 
-                data-cond="Carpal Tunnel Syndrome|De Quervain's Tenosynovitis|Trigger Finger|Myofascial Pain"
-                onclick="activateBodyDot(this)" aria-label="Hand & Wrist">
-                <span class="bm-core"></span>
+                data-title="Hand, Wrist & Fine Motor" 
+                data-region="Occupational Therapy & Neurologic" 
+                data-desc="Fine motor control, stroke hand rehab, nerve paralysis, and upper extremity recovery in specialized OT." 
+                data-cond="Stroke|Multiple Sclerosis|Amyotrophic Lateral Sclerosis|Fracture"
+                onclick="activateBodyDot(this)" aria-label="Hand, Wrist & Fine Motor">
+                <span class="bm-num-label">4</span>
               </button>
 
               <button class="bm-dot" style="left: 31%; top: 41%;" 
                 data-num="5" 
-                data-title="Lower Back & Lumbar Spine" 
-                data-region="Spine & Core" 
-                data-desc="From herniated discs to chronic hip, knee, and back pain, we build spine and core rehabilitation plans that restore mobility and independence." 
-                data-cond="Herniated Disc|Sciatica (Nerve Pain)|Lumbar Muscle Strain|Spinal Cord Injury"
-                onclick="activateBodyDot(this)" aria-label="Lower Back & Lumbar Spine">
-                <span class="bm-core"></span>
+                data-title="Lumbar Spine & Neurologic Rehab" 
+                data-region="Spine & Neurologic Care" 
+                data-desc="Spinal cord injury, severe lower back pain, stroke recovery, and Parkinson's movement therapy." 
+                data-cond="Spinal Cord Injury|Stroke|Parkinson's Disease / PSP|Hip, Knee & Back Pain"
+                onclick="activateBodyDot(this)" aria-label="Lumbar Spine & Neurologic Rehab">
+                <span class="bm-num-label">5</span>
               </button>
 
               <button class="bm-dot" style="left: 69%; top: 44%;" 
                 data-num="6" 
-                data-title="Hip & Pelvis" 
-                data-region="Lower Extremity" 
-                data-desc="Whether recovering from a hip replacement or managing arthritis, we restore joint mobility and gluteal muscle strength to protect your knees and back downstream." 
-                data-cond="Total/Partial Hip Replacement|Hip Osteoarthritis|Trochanteric Bursitis|Myofascial Pain"
-                onclick="activateBodyDot(this)" aria-label="Hip & Pelvis">
-                <span class="bm-core"></span>
+                data-title="Hip & Joint Replacement" 
+                data-region="Musculoskeletal & Orthopedic" 
+                data-desc="Total/partial hip replacements, joint arthritis, fractures, and gluteal gait retraining." 
+                data-cond="Total/Partial Hip Replacement|Fracture|Arthritis|Hip, Knee & Back Pain"
+                onclick="activateBodyDot(this)" aria-label="Hip & Joint Replacement">
+                <span class="bm-num-label">6</span>
               </button>
 
               <button class="bm-dot" style="left: 66.5%; top: 65%;" 
                 data-num="7" 
-                data-title="Knee Joint & Leg" 
-                data-region="Lower Extremity" 
-                data-desc="Knee osteoarthritis, ACL/MCL ligament recovery, and meniscus tears require targeted quadriceps strengthening, gait analysis, and joint unloading protocols." 
-                data-cond="ACL / MCL Ligament Recovery|Meniscus Tear|Patellofemoral Pain|Knee Osteoarthritis"
-                onclick="activateBodyDot(this)" aria-label="Knee & Leg">
-                <span class="bm-core"></span>
+                data-title="Knee & Lower Leg" 
+                data-region="Musculoskeletal & Orthopedic" 
+                data-desc="Knee pain, arthritis, generalized weakness, and post-fracture weight-bearing rehabilitation." 
+                data-cond="Arthritis|Hip, Knee & Back Pain|Fracture|Generalized Body Weakness"
+                onclick="activateBodyDot(this)" aria-label="Knee & Lower Leg">
+                <span class="bm-num-label">7</span>
               </button>
 
               <button class="bm-dot" style="left: 68%; top: 82%;" 
                 data-num="8" 
-                data-title="Ankle & Foot" 
-                data-region="Foot & Ankle" 
-                data-desc="From sprains to post-injury recovery, we retrain movement, balance, and leg strength to keep you steady, active, and pain-free." 
-                data-cond="Plantar Fasciitis|Achilles Tendinitis|Ankle Sprain|Post-Fracture Rehab"
-                onclick="activateBodyDot(this)" aria-label="Ankle & Foot">
-                <span class="bm-core"></span>
+                data-title="Pediatric & Developmental Focus" 
+                data-region="Pediatric Rehabilitation" 
+                data-desc="Specialized pediatric therapy assisting children with motor coordination, muscle tone, and developmental movement milestones." 
+                data-cond="Guillain-Barré Syndrome|Generalized Body Weakness|Pediatric Motor Milestones|Myofascial Pain Syndrome"
+                onclick="activateBodyDot(this)" aria-label="Pediatric & Developmental Focus">
+                <span class="bm-num-label">8</span>
               </button>
             </div>
 
             <!-- Right Side: Region Detail Card Display -->
             <div class="bm-detail-card">
               <span class="bm-num-badge" id="bm-num">01</span>
-              <div class="bm-region-tag" id="bm-region">Upper Spine & Neck</div>
-              <h3 class="bm-title" id="bm-title">Neck & Cervical Spine</h3>
+              <div class="bm-region-tag" id="bm-region">Neurologic & Spine</div>
+              <h3 class="bm-title" id="bm-title">Head, Neck & Facial Nerves</h3>
               <p class="bm-desc" id="bm-desc">
-                Neck stiffness, cervical radiculopathy, and nerve compression can cause radiating shoulder and arm numbness. Our spinal therapy restores range of motion and relieves pressure.
+                Cerebral palsy, Bell's palsy, facial nerve weakness, stroke, and brain injury cases treated with evidence-based PT and OT.
               </p>
 
               <div style="font-weight: 700; font-size: 0.9rem; color: var(--color-deep-forest); margin-bottom: 10px;">
                 Commonly Treated Conditions:
               </div>
               <div class="bm-chips" id="bm-conditions">
-                <span class="chip-tag">Cervical Radiculopathy</span>
-                <span class="chip-tag">Whiplash & Neck Strain</span>
-                <span class="chip-tag">Tension Headaches</span>
-                <span class="chip-tag">Cervical Disc Bulge</span>
+                <span class="chip-tag">Cerebral Palsy</span>
+                <span class="chip-tag">Bell's Palsy</span>
+                <span class="chip-tag">Stroke</span>
+                <span class="chip-tag">Traumatic Brain Injury</span>
               </div>
 
               <button class="btn btn-primary" onclick="bookTargetRegion()">
@@ -1588,14 +1679,12 @@
     <!-- What We Treat - Services & Specialties 3 Picture Boxes -->
     <section class="treat-section" id="what-we-treat">
       <div class="container">
-        <div class="treat-header-flex">
-          <div>
-            <span class="treat-subtag">WHAT WE TREAT</span>
-            <h2 class="treat-main-title">Services & specialties</h2>
-          </div>
-          <div class="treat-header-desc">
+        <div class="treat-header">
+          <span class="treat-subtag">WHAT WE TREAT</span>
+          <h2 class="treat-main-title">Services & specialties</h2>
+          <p class="treat-header-desc">
             From musculoskeletal and orthopedic conditions to neurologic and pediatric cases, our licensed team treats a wide range of conditions with coordinated PT and OT programs.
-          </div>
+          </p>
         </div>
 
         <div class="treat-grid">
@@ -1650,8 +1739,7 @@
               <span class="treat-badge-ot">Occupational Therapy</span>
               <h3 class="treat-card-title">Pediatric cases</h3>
               <div class="treat-pills-wrap">
-                <span class="treat-pill" onclick="openBookingModal('Pediatric: Cerebral palsy')">Cerebral palsy</span>
-                <span class="treat-pill" onclick="openBookingModal('Pediatric: Global developmental delay')">Global developmental delay</span>
+                <span class="treat-pill" onclick="openBookingModal('Pediatric Rehabilitation')">Pediatric rehabilitation & motor milestones</span>
               </div>
             </div>
           </div>
@@ -1668,16 +1756,16 @@
           <p class="section-subtitle">We believe in evidence-based therapy and cutting-edge modalities to ensure you achieve your best recovery.</p>
         </div>
 
-        <div class="services-grid">
+        <div class="services-grid" style="grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));">
           <div class="service-card">
             <div>
               <div class="service-icon-box">
                 <i data-lucide="heart-pulse" size="32"></i>
               </div>
-              <h3 class="service-title">Primary Physical Therapy</h3>
-              <p class="service-desc">Targeted joint mobilization, spinal care, and post-surgical rehabilitation personalized for back, neck, shoulder, and knee pain.</p>
+              <h3 class="service-title">Physical Therapy</h3>
+              <p class="service-desc">Targeted joint mobilization, spine & core care, posture correction, and post-surgical recovery personalized for musculoskeletal and orthopedic conditions.</p>
             </div>
-            <a href="javascript:void(0)" class="service-link" onclick="openBookingModal('Primary Physical Therapy')">
+            <a href="javascript:void(0)" class="service-link" onclick="openBookingModal('Physical Therapy')">
               Discover More <i data-lucide="arrow-right"></i>
             </a>
           </div>
@@ -1688,7 +1776,7 @@
                 <i data-lucide="hand-metal" size="32"></i>
               </div>
               <h3 class="service-title">Occupational Therapy</h3>
-              <p class="service-desc">Restoring fine motor skills, hand & wrist function, and daily activity independence following injury or neurological events.</p>
+              <p class="service-desc">Restoring fine motor skills, hand & wrist functionality, splinting, and adaptive daily activity independence following stroke, nerve, or upper extremity conditions.</p>
             </div>
             <a href="javascript:void(0)" class="service-link" onclick="openBookingModal('Occupational Therapy')">
               Discover More <i data-lucide="arrow-right"></i>
@@ -1698,51 +1786,12 @@
           <div class="service-card">
             <div>
               <div class="service-icon-box">
-                <i data-lucide="flame" size="32"></i>
-              </div>
-              <h3 class="service-title">Sports Injury & Performance</h3>
-              <p class="service-desc">Comprehensive biomechanical assessment, return-to-sport conditioning, and injury prevention for athletes of all levels.</p>
-            </div>
-            <a href="javascript:void(0)" class="service-link" onclick="openBookingModal('Sports Injury & Performance')">
-              Discover More <i data-lucide="arrow-right"></i>
-            </a>
-          </div>
-
-          <div class="service-card">
-            <div>
-              <div class="service-icon-box">
                 <i data-lucide="smile" size="32"></i>
               </div>
-              <h3 class="service-title">Pediatric Therapy</h3>
-              <p class="service-desc">Gentle, play-based physical and sensory integration therapy helping children improve balance, coordination, and developmental milestones.</p>
+              <h3 class="service-title">Pediatric Rehabilitation</h3>
+              <p class="service-desc">Gentle, evidence-based therapy assisting children with cerebral palsy, global developmental delays, motor coordination, and sensory integration milestones.</p>
             </div>
-            <a href="javascript:void(0)" class="service-link" onclick="openBookingModal('Pediatric Therapy')">
-              Discover More <i data-lucide="arrow-right"></i>
-            </a>
-          </div>
-
-          <div class="service-card">
-            <div>
-              <div class="service-icon-box">
-                <i data-lucide="user-check" size="32"></i>
-              </div>
-              <h3 class="service-title">Geriatric & Fall Prevention</h3>
-              <p class="service-desc">Enhancing balance, leg strength, and gait stability for older adults to maintain confidence, safety, and independence.</p>
-            </div>
-            <a href="javascript:void(0)" class="service-link" onclick="openBookingModal('Geriatric Therapy')">
-              Discover More <i data-lucide="arrow-right"></i>
-            </a>
-          </div>
-
-          <div class="service-card">
-            <div>
-              <div class="service-icon-box">
-                <i data-lucide="brain" size="32"></i>
-              </div>
-              <h3 class="service-title">Neurological Rehabilitation</h3>
-              <p class="service-desc">Specialized neuro-rehab for stroke recovery, Parkinson's disease, vestibular balance disorders, and nerve conditions.</p>
-            </div>
-            <a href="javascript:void(0)" class="service-link" onclick="openBookingModal('Neurological Rehab')">
+            <a href="javascript:void(0)" class="service-link" onclick="openBookingModal('Pediatric Rehabilitation')">
               Discover More <i data-lucide="arrow-right"></i>
             </a>
           </div>
@@ -1842,7 +1891,7 @@
         <div class="team-grid">
           <div class="team-card">
             <div class="team-img-box">
-              <img src="https://res.cloudinary.com/zylwakez/image/upload/v1784706427/yespapa_mgrluw.jpg" alt="Johnny Sins, MD, PHD">
+              <img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=800&q=80" alt="Johnny Sins, MD, PHD" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=800&q=80';">
             </div>
             <div class="team-info">
               <h3 class="team-name">Johnny Sins, MD, PHD</h3>
@@ -1855,11 +1904,11 @@
 
           <div class="team-card">
             <div class="team-img-box">
-              <img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=600&q=80" alt="Oscar Tabarez, Physical Therapist">
+              <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&w=800&q=80" alt="Oscar Tabarez, Physical Therapist" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=800&q=80';">
             </div>
             <div class="team-info">
               <h3 class="team-name">Oscar Tabarez, PTRP</h3>
-              <p class="team-role">Sports Rehabilitation Specialist</p>
+              <p class="team-role">Physical Therapy Specialist</p>
               <button class="btn btn-outline" style="padding: 8px 18px; font-size: 0.85rem;" onclick="openBookingModal('Therapist: Oscar Tabarez')">
                 Book Visit
               </button>
@@ -1868,7 +1917,7 @@
 
           <div class="team-card">
             <div class="team-img-box">
-              <img src="https://images.unsplash.com/photo-1594824813571-24a69c100417?auto=format&fit=crop&w=600&q=80" alt="Beatrice Ramsey, Occupational Therapist">
+              <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=800&q=80" alt="Beatrice Ramsey, Occupational Therapist" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=800&q=80';">
             </div>
             <div class="team-info">
               <h3 class="team-name">Beatrice Ramsey, OTRP</h3>
@@ -1881,7 +1930,7 @@
 
           <div class="team-card">
             <div class="team-img-box">
-              <img src="https://images.unsplash.com/photo-1582750433449-648ed127bb54?auto=format&fit=crop&w=600&q=80" alt="Alexandre Morgan, Physical Therapist">
+              <img src="https://images.unsplash.com/photo-1537368910025-700350fe46c7?auto=format&fit=crop&w=800&q=80" alt="Alexandre Morgan, Physical Therapist" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=800&q=80';">
             </div>
             <div class="team-info">
               <h3 class="team-name">Alexandre Morgan, PTRP</h3>
@@ -2071,9 +2120,9 @@
               <div>
                 <label class="book-form-label">Reason for visit</label>
                 <select class="book-form-select" required style="cursor: pointer; appearance: none; background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23064E3B%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpolyline%20points%3D%226%209%2012%2015%2018%209%22%3E%3C%2Fpolyline%3E%3C%2Fsvg%3E'); background-repeat: no-repeat; background-position: right 14px center; background-size: 16px;">
-                  <option value="Musculoskeletal & orthopedic">Musculoskeletal & orthopedic</option>
-                  <option value="Neurologic cases">Neurologic cases</option>
-                  <option value="Pediatric cases">Pediatric cases</option>
+                  <option value="Physical Therapy">Physical Therapy</option>
+                  <option value="Occupational Therapy">Occupational Therapy</option>
+                  <option value="Pediatric Rehabilitation">Pediatric Rehabilitation</option>
                   <option value="Not Yet">Not Yet</option>
                 </select>
               </div>
@@ -2146,10 +2195,8 @@
       <div class="footer-grid">
         <div class="footer-brand">
           <div class="logo" style="color: var(--color-champagne);">
-            <div class="logo-icon" style="background: var(--color-champagne); color: var(--color-deep-forest);">
-              <i data-lucide="activity"></i>
-            </div>
-            <span>FlexTend PT</span>
+            <img src="https://res.cloudinary.com/zylwakez/image/upload/v1784727300/469096100_122187442646236134_3866953868595262826_n_cbkuep.jpg" alt="FlexTend Physical Therapy Clinic Logo" class="brand-logo-img" style="border: 2px solid var(--border-accent);">
+            <span style="color: var(--color-champagne);">FlexTend</span>
           </div>
           <p>Evidence-based physical and occupational therapy clinic in Lipa City, Batangas. Restoring movement, independence, and quality of life.</p>
         </div>
@@ -2171,9 +2218,7 @@
           <ul class="footer-links">
             <li><a href="#services">Physical Therapy</a></li>
             <li><a href="#services">Occupational Therapy</a></li>
-            <li><a href="#services">Sports Rehab</a></li>
-            <li><a href="#services">Pediatric PT</a></li>
-            <li><a href="#services">Geriatric Care</a></li>
+            <li><a href="#services">Pediatric Rehabilitation</a></li>
           </ul>
         </div>
 
