@@ -1075,7 +1075,266 @@
       padding-bottom: 60px;
     }
   }
-</style>
+
+  /* What We Treat - Services & Specialties 3 Picture Boxes Section */
+  .treat-section {
+    padding: 64px 0 32px;
+    background: var(--color-warm-white);
+  }
+  .treat-header-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 40px;
+    margin-bottom: 36px;
+    flex-wrap: wrap;
+  }
+  .treat-subtag {
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-antique-gold);
+    margin-bottom: 8px;
+    display: block;
+  }
+  .treat-main-title {
+    font-family: var(--font-heading);
+    font-size: 2.75rem;
+    font-weight: 800;
+    color: var(--color-deep-forest);
+    line-height: 1.15;
+  }
+  .treat-header-desc {
+    max-width: 480px;
+    font-size: 1.02rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+  .treat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 28px;
+  }
+  .treat-card {
+    background: #FAF5EC;
+    border: 1px solid rgba(201, 162, 75, 0.25);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition);
+  }
+  .treat-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--color-jade);
+  }
+  .treat-img-wrap {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+    position: relative;
+  }
+  .treat-img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+  .treat-card:hover .treat-img-wrap img {
+    transform: scale(1.05);
+  }
+  .treat-card-body {
+    padding: 28px 24px 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    flex: 1;
+  }
+  .treat-badge-pt {
+    display: inline-block;
+    padding: 5px 14px;
+    border-radius: 20px;
+    background: #E8F5E9;
+    color: #2E7D32;
+    font-size: 0.82rem;
+    font-weight: 700;
+    width: fit-content;
+  }
+  .treat-badge-ot {
+    display: inline-block;
+    padding: 5px 14px;
+    border-radius: 20px;
+    background: #FFF3E0;
+    color: #E65100;
+    font-size: 0.82rem;
+    font-weight: 700;
+    width: fit-content;
+  }
+  .treat-card-title {
+    font-family: var(--font-heading);
+    font-size: 1.75rem;
+    font-weight: 800;
+    color: var(--color-deep-forest);
+    margin-top: 2px;
+  }
+  .treat-pills-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 10px;
+    margin-top: 6px;
+  }
+  .treat-pill {
+    display: inline-block;
+    padding: 6px 14px;
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 20px;
+    font-size: 0.86rem;
+    font-weight: 500;
+    color: #4A5568;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+    transition: var(--transition);
+    cursor: pointer;
+  }
+  .treat-pill:hover {
+    border-color: var(--color-jade);
+    color: var(--color-emerald-ink);
+    background: #F0FDF4;
+    transform: translateY(-2px);
+  }
+  
+  /* Theme Palette Compliant Inline Appointment Booking Section */
+  .book-appointment-section {
+    padding: 56px 0 72px;
+  }
+  .book-panel {
+    background: linear-gradient(135deg, rgba(248, 231, 201, 0.5) 0%, rgba(46, 155, 124, 0.14) 100%);
+    border: 1px solid rgba(201, 162, 75, 0.3);
+    border-radius: 24px;
+    padding: 52px 48px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: start;
+    box-shadow: var(--shadow-sm);
+  }
+  @media (max-width: 992px) {
+    .book-panel {
+      grid-template-columns: 1fr;
+      gap: 36px;
+      padding: 36px 24px;
+    }
+  }
+  .book-subtag {
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-antique-gold);
+    margin-bottom: 8px;
+    display: block;
+  }
+  .book-title {
+    font-family: var(--font-heading);
+    font-size: 2.65rem;
+    font-weight: 800;
+    color: var(--color-deep-forest);
+    line-height: 1.15;
+    margin-bottom: 16px;
+  }
+  .book-desc {
+    font-size: 1.02rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin-bottom: 36px;
+  }
+  .book-contact-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+  }
+  .book-contact-icon {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background: var(--color-emerald-ink);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-champagne);
+    flex-shrink: 0;
+    box-shadow: 0 4px 12px rgba(6, 78, 59, 0.25);
+  }
+  .book-contact-label {
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-muted);
+    font-weight: 600;
+  }
+  .book-contact-val {
+    font-weight: 800;
+    color: var(--color-deep-forest);
+    font-size: 1.02rem;
+    line-height: 1.4;
+  }
+  .book-contact-val a {
+    color: var(--color-emerald-ink);
+    text-decoration: underline;
+  }
+  .book-form-card {
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 38px 34px;
+    box-shadow: var(--shadow-md);
+    border: 1px solid var(--border-accent);
+  }
+  .book-form-label {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--color-deep-forest);
+    margin-bottom: 6px;
+    display: block;
+  }
+  .book-form-input, .book-form-select, .book-form-textarea {
+    width: 100%;
+    padding: 12px 16px;
+    border-radius: 12px;
+    border: 1px solid var(--border-light);
+    background: var(--color-warm-white);
+    font-size: 0.95rem;
+    color: var(--color-deep-forest);
+    outline: none;
+    transition: var(--transition);
+  }
+  .book-form-input:focus, .book-form-select:focus, .book-form-textarea:focus {
+    border-color: var(--color-jade);
+    box-shadow: 0 0 0 3px rgba(46, 155, 124, 0.15);
+    background: #ffffff;
+  }
+  .book-submit-btn {
+    width: 100%;
+    padding: 14px 24px;
+    border-radius: 14px;
+    background: var(--color-emerald-ink);
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 1.05rem;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 14px rgba(6, 78, 59, 0.3);
+    transition: var(--transition);
+    margin-top: 4px;
+  }
+  .book-submit-btn:hover {
+    background: var(--color-deep-forest);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(3, 45, 34, 0.4);
+  }
+  </style>
 </head>
 <body>
 
@@ -1196,97 +1455,6 @@
             <button class="btn btn-champagne" onclick="openBookingModal('General Consultation')">
               Learn More & Book Evaluation <i data-lucide="arrow-right"></i>
             </button>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Services Grid Section (Shadcn Cards) -->
-    <section class="services-section" id="services">
-      <div class="container">
-        <div class="section-header">
-          <span class="badge badge-jade">Specialized Care</span>
-          <h2 class="section-title">Exceptional Care with Exceptional Technology</h2>
-          <p class="section-subtitle">We believe in evidence-based therapy and cutting-edge modalities to ensure you achieve your best recovery.</p>
-        </div>
-
-        <div class="services-grid">
-          <div class="service-card">
-            <div>
-              <div class="service-icon-box">
-                <i data-lucide="heart-pulse" size="32"></i>
-              </div>
-              <h3 class="service-title">Primary Physical Therapy</h3>
-              <p class="service-desc">Targeted joint mobilization, spinal care, and post-surgical rehabilitation personalized for back, neck, shoulder, and knee pain.</p>
-            </div>
-            <a href="javascript:void(0)" class="service-link" onclick="openBookingModal('Primary Physical Therapy')">
-              Discover More <i data-lucide="arrow-right"></i>
-            </a>
-          </div>
-
-          <div class="service-card">
-            <div>
-              <div class="service-icon-box">
-                <i data-lucide="hand-metal" size="32"></i>
-              </div>
-              <h3 class="service-title">Occupational Therapy</h3>
-              <p class="service-desc">Restoring fine motor skills, hand & wrist function, and daily activity independence following injury or neurological events.</p>
-            </div>
-            <a href="javascript:void(0)" class="service-link" onclick="openBookingModal('Occupational Therapy')">
-              Discover More <i data-lucide="arrow-right"></i>
-            </a>
-          </div>
-
-          <div class="service-card">
-            <div>
-              <div class="service-icon-box">
-                <i data-lucide="flame" size="32"></i>
-              </div>
-              <h3 class="service-title">Sports Injury & Performance</h3>
-              <p class="service-desc">Comprehensive biomechanical assessment, return-to-sport conditioning, and injury prevention for athletes of all levels.</p>
-            </div>
-            <a href="javascript:void(0)" class="service-link" onclick="openBookingModal('Sports Injury & Performance')">
-              Discover More <i data-lucide="arrow-right"></i>
-            </a>
-          </div>
-
-          <div class="service-card">
-            <div>
-              <div class="service-icon-box">
-                <i data-lucide="smile" size="32"></i>
-              </div>
-              <h3 class="service-title">Pediatric Therapy</h3>
-              <p class="service-desc">Gentle, play-based physical and sensory integration therapy helping children improve balance, coordination, and developmental milestones.</p>
-            </div>
-            <a href="javascript:void(0)" class="service-link" onclick="openBookingModal('Pediatric Therapy')">
-              Discover More <i data-lucide="arrow-right"></i>
-            </a>
-          </div>
-
-          <div class="service-card">
-            <div>
-              <div class="service-icon-box">
-                <i data-lucide="user-check" size="32"></i>
-              </div>
-              <h3 class="service-title">Geriatric & Fall Prevention</h3>
-              <p class="service-desc">Enhancing balance, leg strength, and gait stability for older adults to maintain confidence, safety, and independence.</p>
-            </div>
-            <a href="javascript:void(0)" class="service-link" onclick="openBookingModal('Geriatric Therapy')">
-              Discover More <i data-lucide="arrow-right"></i>
-            </a>
-          </div>
-
-          <div class="service-card">
-            <div>
-              <div class="service-icon-box">
-                <i data-lucide="brain" size="32"></i>
-              </div>
-              <h3 class="service-title">Neurological Rehabilitation</h3>
-              <p class="service-desc">Specialized neuro-rehab for stroke recovery, Parkinson's disease, vestibular balance disorders, and nerve conditions.</p>
-            </div>
-            <a href="javascript:void(0)" class="service-link" onclick="openBookingModal('Neurological Rehab')">
-              Discover More <i data-lucide="arrow-right"></i>
-            </a>
           </div>
         </div>
       </div>
@@ -1417,6 +1585,173 @@
       </div>
     </section>
 
+    <!-- What We Treat - Services & Specialties 3 Picture Boxes -->
+    <section class="treat-section" id="what-we-treat">
+      <div class="container">
+        <div class="treat-header-flex">
+          <div>
+            <span class="treat-subtag">WHAT WE TREAT</span>
+            <h2 class="treat-main-title">Services & specialties</h2>
+          </div>
+          <div class="treat-header-desc">
+            From musculoskeletal and orthopedic conditions to neurologic and pediatric cases, our licensed team treats a wide range of conditions with coordinated PT and OT programs.
+          </div>
+        </div>
+
+        <div class="treat-grid">
+          <!-- Box 1: Physical Therapy (Musculoskeletal & Orthopedic) -->
+          <div class="treat-card">
+            <div class="treat-img-wrap">
+              <img src="https://res.cloudinary.com/zylwakez/image/upload/v1784705846/Musculoskeletal_orthopedic_gv1fvz.png" alt="Musculoskeletal & Orthopedic Physical Therapy">
+            </div>
+            <div class="treat-card-body">
+              <span class="treat-badge-pt">Physical Therapy</span>
+              <h3 class="treat-card-title">Musculoskeletal & orthopedic</h3>
+              <div class="treat-pills-wrap">
+                <span class="treat-pill" onclick="openBookingModal('Musculoskeletal: Fracture')">Fracture</span>
+                <span class="treat-pill" onclick="openBookingModal('Musculoskeletal: Total/partial hip replacement')">Total/partial hip replacement</span>
+                <span class="treat-pill" onclick="openBookingModal('Musculoskeletal: Frozen shoulder')">Frozen shoulder</span>
+                <span class="treat-pill" onclick="openBookingModal('Musculoskeletal: Arthritis')">Arthritis</span>
+                <span class="treat-pill" onclick="openBookingModal('Musculoskeletal: Hip, knee & back pain')">Hip, knee & back pain</span>
+                <span class="treat-pill" onclick="openBookingModal('Musculoskeletal: Scoliosis')">Scoliosis</span>
+                <span class="treat-pill" onclick="openBookingModal('Musculoskeletal: Generalized body weakness')">Generalized body weakness</span>
+                <span class="treat-pill" onclick="openBookingModal('Musculoskeletal: Myofascial pain syndrome')">Myofascial pain syndrome</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Box 2: PT + OT (Neurologic Cases) -->
+          <div class="treat-card">
+            <div class="treat-img-wrap">
+              <img src="https://res.cloudinary.com/zylwakez/image/upload/v1784705845/Neurologic_cases_jylu4f.jpg" alt="Neurologic Cases PT + OT Therapy">
+            </div>
+            <div class="treat-card-body">
+              <span class="treat-badge-pt">PT + OT</span>
+              <h3 class="treat-card-title">Neurologic cases</h3>
+              <div class="treat-pills-wrap">
+                <span class="treat-pill" onclick="openBookingModal('Neurologic: Bell\'s palsy')">Bell's palsy</span>
+                <span class="treat-pill" onclick="openBookingModal('Neurologic: Stroke')">Stroke</span>
+                <span class="treat-pill" onclick="openBookingModal('Neurologic: Spinal cord injury')">Spinal cord injury</span>
+                <span class="treat-pill" onclick="openBookingModal('Neurologic: Traumatic brain injury')">Traumatic brain injury</span>
+                <span class="treat-pill" onclick="openBookingModal('Neurologic: Parkinson\'s disease / PSP')">Parkinson's disease / PSP</span>
+                <span class="treat-pill" onclick="openBookingModal('Neurologic: Multiple sclerosis')">Multiple sclerosis</span>
+                <span class="treat-pill" onclick="openBookingModal('Neurologic: Guillain-BarrÃ© syndrome')">Guillain-BarrÃ© syndrome</span>
+                <span class="treat-pill" onclick="openBookingModal('Neurologic: Amyotrophic lateral sclerosis')">Amyotrophic lateral sclerosis</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Box 3: Occupational Therapy (Pediatric Cases) -->
+          <div class="treat-card">
+            <div class="treat-img-wrap">
+              <img src="https://res.cloudinary.com/zylwakez/image/upload/v1784705845/Pediatric_cases_xn34gk.jpg" alt="Pediatric Cases Occupational Therapy">
+            </div>
+            <div class="treat-card-body">
+              <span class="treat-badge-ot">Occupational Therapy</span>
+              <h3 class="treat-card-title">Pediatric cases</h3>
+              <div class="treat-pills-wrap">
+                <span class="treat-pill" onclick="openBookingModal('Pediatric: Cerebral palsy')">Cerebral palsy</span>
+                <span class="treat-pill" onclick="openBookingModal('Pediatric: Global developmental delay')">Global developmental delay</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services Grid Section (Shadcn Cards) -->
+    <section class="services-section" id="services">
+      <div class="container">
+        <div class="section-header">
+          <span class="badge badge-jade">Specialized Care</span>
+          <h2 class="section-title">Exceptional Care with Exceptional Technology</h2>
+          <p class="section-subtitle">We believe in evidence-based therapy and cutting-edge modalities to ensure you achieve your best recovery.</p>
+        </div>
+
+        <div class="services-grid">
+          <div class="service-card">
+            <div>
+              <div class="service-icon-box">
+                <i data-lucide="heart-pulse" size="32"></i>
+              </div>
+              <h3 class="service-title">Primary Physical Therapy</h3>
+              <p class="service-desc">Targeted joint mobilization, spinal care, and post-surgical rehabilitation personalized for back, neck, shoulder, and knee pain.</p>
+            </div>
+            <a href="javascript:void(0)" class="service-link" onclick="openBookingModal('Primary Physical Therapy')">
+              Discover More <i data-lucide="arrow-right"></i>
+            </a>
+          </div>
+
+          <div class="service-card">
+            <div>
+              <div class="service-icon-box">
+                <i data-lucide="hand-metal" size="32"></i>
+              </div>
+              <h3 class="service-title">Occupational Therapy</h3>
+              <p class="service-desc">Restoring fine motor skills, hand & wrist function, and daily activity independence following injury or neurological events.</p>
+            </div>
+            <a href="javascript:void(0)" class="service-link" onclick="openBookingModal('Occupational Therapy')">
+              Discover More <i data-lucide="arrow-right"></i>
+            </a>
+          </div>
+
+          <div class="service-card">
+            <div>
+              <div class="service-icon-box">
+                <i data-lucide="flame" size="32"></i>
+              </div>
+              <h3 class="service-title">Sports Injury & Performance</h3>
+              <p class="service-desc">Comprehensive biomechanical assessment, return-to-sport conditioning, and injury prevention for athletes of all levels.</p>
+            </div>
+            <a href="javascript:void(0)" class="service-link" onclick="openBookingModal('Sports Injury & Performance')">
+              Discover More <i data-lucide="arrow-right"></i>
+            </a>
+          </div>
+
+          <div class="service-card">
+            <div>
+              <div class="service-icon-box">
+                <i data-lucide="smile" size="32"></i>
+              </div>
+              <h3 class="service-title">Pediatric Therapy</h3>
+              <p class="service-desc">Gentle, play-based physical and sensory integration therapy helping children improve balance, coordination, and developmental milestones.</p>
+            </div>
+            <a href="javascript:void(0)" class="service-link" onclick="openBookingModal('Pediatric Therapy')">
+              Discover More <i data-lucide="arrow-right"></i>
+            </a>
+          </div>
+
+          <div class="service-card">
+            <div>
+              <div class="service-icon-box">
+                <i data-lucide="user-check" size="32"></i>
+              </div>
+              <h3 class="service-title">Geriatric & Fall Prevention</h3>
+              <p class="service-desc">Enhancing balance, leg strength, and gait stability for older adults to maintain confidence, safety, and independence.</p>
+            </div>
+            <a href="javascript:void(0)" class="service-link" onclick="openBookingModal('Geriatric Therapy')">
+              Discover More <i data-lucide="arrow-right"></i>
+            </a>
+          </div>
+
+          <div class="service-card">
+            <div>
+              <div class="service-icon-box">
+                <i data-lucide="brain" size="32"></i>
+              </div>
+              <h3 class="service-title">Neurological Rehabilitation</h3>
+              <p class="service-desc">Specialized neuro-rehab for stroke recovery, Parkinson's disease, vestibular balance disorders, and nerve conditions.</p>
+            </div>
+            <a href="javascript:void(0)" class="service-link" onclick="openBookingModal('Neurological Rehab')">
+              Discover More <i data-lucide="arrow-right"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    
+
     <section class="carousel-section" id="gallery">
       <div class="container">
         <div class="section-header">
@@ -1507,12 +1842,12 @@
         <div class="team-grid">
           <div class="team-card">
             <div class="team-img-box">
-              <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=600&q=80" alt="Dr. Alicia Abigail, Senior Physical Therapist">
+              <img src="https://res.cloudinary.com/zylwakez/image/upload/v1784706427/yespapa_mgrluw.jpg" alt="Johnny Sins, MD, PHD">
             </div>
             <div class="team-info">
-              <h3 class="team-name">Alicia Abigail, PTRP</h3>
+              <h3 class="team-name">Johnny Sins, MD, PHD</h3>
               <p class="team-role">Senior Physical Therapist</p>
-              <button class="btn btn-outline" style="padding: 8px 18px; font-size: 0.85rem;" onclick="openBookingModal('Therapist: Alicia Abigail')">
+              <button class="btn btn-outline" style="padding: 8px 18px; font-size: 0.85rem;" onclick="openBookingModal('Therapist: Johnny Sins, MD, PHD')">
                 Book Visit
               </button>
             </div>
@@ -1572,42 +1907,192 @@
         <div class="faq-container">
           <div class="faq-item active">
             <button class="faq-question" onclick="toggleFaq(this)">
-              <span>Do I need a doctor's referral to start therapy?</span>
+              <span>What's the difference between physical therapy and occupational therapy?</span>
               <i data-lucide="chevron-down"></i>
             </button>
             <div class="faq-answer">
-              In most cases, no. Under direct access guidelines in the Philippines, you can schedule an initial evaluation directly with our licensed physical therapists. We will verify your health plan coverage prior to your visit.
+              Physical therapy (PT) focuses on restoring movement, strength, and physical function - walking, balance, mobility. Occupational therapy (OT) focuses on the skills needed for daily life and independence - dressing, cooking, writing, work tasks, fine motor control. Many patients receive both, especially after stroke, surgery, or injury.
             </div>
           </div>
 
           <div class="faq-item">
             <button class="faq-question" onclick="toggleFaq(this)">
-              <span>What insurance or health plans do you accept?</span>
+              <span>How long does each session last?</span>
               <i data-lucide="chevron-down"></i>
             </button>
             <div class="faq-answer">
-              We work with major health maintenance organizations (HMOs) and insurance providers. Simply share your provider details when booking, and our clinical coordinator will assist in verifying your benefits.
+              Most PT and OT sessions run 45-60 minutes, though initial evaluations may take slightly longer.
             </div>
           </div>
 
           <div class="faq-item">
             <button class="faq-question" onclick="toggleFaq(this)">
-              <span>What should I wear for my first appointment?</span>
+              <span>How many sessions will I need?</span>
               <i data-lucide="chevron-down"></i>
             </button>
             <div class="faq-answer">
-              Please wear comfortable athletic or loose clothing that allows easy movement of the area being evaluated (e.g., shorts for knee/hip issues, t-shirt for shoulder/neck evaluation).
+              This varies by condition and severity, but many patients see noticeable progress within 6-12 sessions. Your therapist will give you a more specific estimate after your evaluation.
             </div>
           </div>
 
           <div class="faq-item">
             <button class="faq-question" onclick="toggleFaq(this)">
-              <span>How soon can I be seen for an evaluation?</span>
+              <span>At what age can a child start occupational therapy?</span>
               <i data-lucide="chevron-down"></i>
             </button>
             <div class="faq-answer">
-              Most new patients are scheduled within 48 hours of contacting us. Same-day appointments are available for acute injuries—please call our clinic directly at +63 967 195 6863.
+              OT can begin in infancy if developmental concerns are identified, though it's most commonly started in toddler and early school years for delays in motor skills, sensory processing, or behavior.
             </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" onclick="toggleFaq(this)">
+              <span>Do you treat older adults differently than younger patients?</span>
+              <i data-lucide="chevron-down"></i>
+            </button>
+            <div class="faq-answer">
+              Yes. Geriatric rehabilitation places extra emphasis on balance, fall prevention, and functional independence, with treatment paced according to the patient's overall health and mobility.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" onclick="toggleFaq(this)">
+              <span>Do you offer therapy for post-surgical recovery?</span>
+              <i data-lucide="chevron-down"></i>
+            </button>
+            <div class="faq-answer">
+              Yes, we support recovery following a range of procedures, coordinating closely with your surgeon's timeline and guidelines.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" onclick="toggleFaq(this)">
+              <span>Is therapy safe for chronic or progressive conditions?</span>
+              <i data-lucide="chevron-down"></i>
+            </button>
+            <div class="faq-answer">
+              Yes. Treatment plans are carefully tailored to your specific diagnosis and current abilities, with intensity and technique adjusted to what's safe and effective for your condition.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Inline Appointment Booking Section (Below FAQ) -->
+    <section class="book-appointment-section" id="book-first-appointment">
+      <div class="container">
+        <div class="book-panel">
+          
+          <!-- Left Column: Info & Contact Details -->
+          <div>
+            <span class="book-subtag">GET STARTED</span>
+            <h2 class="book-title">Book your first appointment</h2>
+            <p class="book-desc">
+              Tell us a little about what's going on and we'll match you with the right clinician. Most new patients are seen within 48 hours.
+            </p>
+
+            <div style="display: flex; flex-direction: column; gap: 24px;">
+              <!-- Call us -->
+              <div class="book-contact-item">
+                <div class="book-contact-icon">
+                  <i data-lucide="phone" size="20"></i>
+                </div>
+                <div>
+                  <div class="book-contact-label">Call us</div>
+                  <div class="book-contact-val"><a href="tel:+639671956863" style="color: var(--color-deep-forest); text-decoration: underline;">0967 195 6863</a> / <a href="tel:+639064574530" style="color: var(--color-deep-forest); text-decoration: underline;">0906 457 4530</a></div>
+                </div>
+              </div>
+
+              <!-- Email -->
+              <div class="book-contact-item">
+                <div class="book-contact-icon">
+                  <i data-lucide="mail" size="20"></i>
+                </div>
+                <div>
+                  <div class="book-contact-label">Email</div>
+                  <div class="book-contact-val"><a href="https://mail.google.com/mail/?view=cm&fs=1&to=flextendtherapy2024@gmail.com" target="_blank" style="color: var(--color-deep-forest); text-decoration: underline;">flextendtherapy2024@gmail.com</a></div>
+                </div>
+              </div>
+
+              <!-- Visit -->
+              <div class="book-contact-item">
+                <div class="book-contact-icon">
+                  <i data-lucide="map-pin" size="20"></i>
+                </div>
+                <div>
+                  <div class="book-contact-label">Visit</div>
+                  <div class="book-contact-val">
+                    <a href="https://maps.app.goo.gl/QBoQGC5gAwqWQKBH9" target="_blank" style="color: var(--color-deep-forest); text-decoration: none;">
+                      299 San Jose Subdivision Balagbag Brgy. San Sebastian , Lipa City, Philippines, 4217
+                    </a> &mdash; <a href="https://maps.app.goo.gl/QBoQGC5gAwqWQKBH9" target="_blank" style="color: var(--color-emerald-ink); font-weight: 700; text-decoration: underline;">get directions</a>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Hours -->
+              <div class="book-contact-item">
+                <div class="book-contact-icon">
+                  <i data-lucide="clock" size="20"></i>
+                </div>
+                <div>
+                  <div class="book-contact-label">Hours</div>
+                  <div class="book-contact-val" style="display: flex; flex-direction: column; gap: 2px; margin-top: 2px;">
+                    <div>Mon - Fri: 8am - 4pm</div>
+                    <div>Sat: By Appointment (Home Visit)</div>
+                    <div>Sun: Closed</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column: Form Card -->
+          <div class="book-form-card">
+            <form onsubmit="handleInlineBookSubmit(event)" style="display: flex; flex-direction: column; gap: 18px;">
+              <!-- Name Row -->
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+                <div>
+                  <label class="book-form-label">First name</label>
+                  <input type="text" class="book-form-input" placeholder="Jane" required>
+                </div>
+                <div>
+                  <label class="book-form-label">Last name</label>
+                  <input type="text" class="book-form-input" placeholder="Doe" required>
+                </div>
+              </div>
+
+              <!-- Email -->
+              <div>
+                <label class="book-form-label">Email</label>
+                <input type="email" class="book-form-input" placeholder="jane@email.com" required>
+              </div>
+
+              <!-- Reason for visit -->
+              <div>
+                <label class="book-form-label">Reason for visit</label>
+                <select class="book-form-select" required style="cursor: pointer; appearance: none; background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23064E3B%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpolyline%20points%3D%226%209%2012%2015%2018%209%22%3E%3C%2Fpolyline%3E%3C%2Fsvg%3E'); background-repeat: no-repeat; background-position: right 14px center; background-size: 16px;">
+                  <option value="Musculoskeletal & orthopedic">Musculoskeletal & orthopedic</option>
+                  <option value="Neurologic cases">Neurologic cases</option>
+                  <option value="Pediatric cases">Pediatric cases</option>
+                  <option value="Not Yet">Not Yet</option>
+                </select>
+              </div>
+
+              <!-- Tell us what's going on -->
+              <div>
+                <label class="book-form-label">Tell us what's going on</label>
+                <textarea class="book-form-textarea" rows="3" placeholder="A short description of your symptoms or goals..."></textarea>
+              </div>
+
+              <!-- Submit Button -->
+              <button type="submit" class="book-submit-btn">
+                Request appointment
+              </button>
+
+              <div style="font-size: 0.8rem; text-align: center; color: var(--text-muted); margin-top: 2px;">
+                We'll confirm within one business day. Your information stays private.
+              </div>
+            </form>
           </div>
         </div>
       </div>
@@ -1697,7 +2182,7 @@
           <ul class="footer-links">
             <li>📍 299 San Jose Subd., Balagbag, Brgy. San Sebastian, Lipa City, Batangas 4217</li>
             <li>📞 <a href="tel:+639671956863">+63 967 195 6863</a></li>
-            <li>✉️ <a href="mailto:flextendtherapy2024@gmail.com">flextendtherapy2024@gmail.com</a></li>
+            <li>✉️ <a href="https://mail.google.com/mail/?view=cm&fs=1&to=flextendtherapy2024@gmail.com">flextendtherapy2024@gmail.com</a></li>
             <li>🕒 Mon – Sat: 8:00 AM – 4:00 PM</li>
           </ul>
         </div>
@@ -1818,6 +2303,12 @@
     function handleQuickBook() {
       const service = document.getElementById('quick-service').value;
       openBookingModal(service);
+    }
+
+    function handleInlineBookSubmit(event) {
+      event.preventDefault();
+      showToast("Appointment Request Sent!", "Thank you! Our clinical team will confirm your session within 1 business day.");
+      event.target.reset();
     }
 
     function handleFormSubmit(event) {
