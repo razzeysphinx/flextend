@@ -1,63 +1,44 @@
-# Implementation Plan — FlexTend PT Website Redesign & Carousel Integration
+# Implementation Plan — FlexTend PT Website Mobile Responsiveness Fix
 
-Redesign the **FlexTend Physical Therapy Clinic** website (`FLEXTEND REVISED 2.html`) to adopt the **Emerald Ink & Champagne** 6-color palette, modern healthcare design aesthetics (inspired by the provided UI mockups), and Shadcn-style UI components including an interactive image showcase Carousel.
+Enhance and fix the mobile responsiveness of the **FlexTend Physical Therapy Clinic** website ([index.html](file:///c:/Users/peral/Documents/flextend/index.html)) to ensure seamless readability, navigation, and usability across all mobile screen sizes (from 320px ultra-narrow smartphones up to 768px tablets and desktops).
 
-## 6-Color Palette Specification
+## Core Mobile Responsiveness Improvements
 
-| Role | Color Name | Hex Code | Usage |
-|---|---|---|---|
-| **Darkest** | Deep Forest | `#032D22` | Hero dark banner, dark cards, footer, primary dark typography |
-| **Primary** | Emerald Ink | `#064E3B` | Main brand color, header CTA buttons, primary section backgrounds |
-| **Highlight** | Jade | `#2E9B7C` | Accents, active indicators, hover highlights, success badges |
-| **Light** | Champagne | `#F8E7C9` | Section background tint, card background surfaces, subtle fills |
-| **Metallic** | Antique Gold | `#C9A24B` | Badge accents, star ratings, premium callouts, icon highlights |
-| **Accent** | Terracotta | `#C1663F` | Secondary CTA buttons, interactive hover elements, arrow links |
-| *Body Light* | Off-White Champagne | `#FAF7F2` | Main page background |
+### 1. Mobile Header & Navigation Drawer
+- **Hamburger Menu Button**: Add an animated mobile menu button (`<button class="mobile-toggle">`) with Lucide `menu` / `x` icon in the sticky header.
+- **Mobile Drawer Navigation Overlay**: Implement a smooth backdrop drawer for mobile viewports (`<= 768px`) containing all navigation links (`Home`, `Services`, `Interactive Body Map`, `Gallery & Facility`, `Clinicians`, `FAQ`) so mobile users can navigate sections effortlessly.
+- **Header Actions Adaptation**: Optimize phone link and "Book Now" CTA display in the header for small screens (<= 480px) to prevent layout wrapping or overflow.
 
----
+### 2. Typography & Viewport Scaling
+- **Fluid Heading Sizes**: Use CSS `clamp()` and responsive font-size media rules for section titles and hero headings (preventing line overflows on 320px–390px screens).
+- **iOS Safari Auto-Zoom Fix**: Ensure all form inputs, selects, and textareas use a minimum `font-size: 16px` on mobile viewports to prevent unwanted page auto-zooming on focus.
 
-## Proposed Key Features & Components
+### 3. Grid Layout & Flexbox Overflow Fixes
+- **Treatments & Services Grid (`.treat-grid`)**: Update `grid-template-columns` minmax from `320px` to `minmax(270px, 1fr)` to prevent horizontal scrollbars on 320px–360px mobile screens.
+- **Clinicians Grid (`.team-grid`)**: Adjust `minmax` to `minmax(240px, 1fr)` on small devices.
+- **Inline Booking Form (`.book-panel` & `.book-form-card`)**:
+  - Collapse name input row (`grid-template-columns: 1fr 1fr`) to single column `1fr` on screens below `576px`.
+  - Adjust internal padding (`52px 48px` -> `24px 16px` on mobile).
+- **Footer Grid (`.footer-grid`)**: Change from 2 columns to single column (`1fr`) on screens `<= 640px` for optimal tap target spacing and readability.
 
-### 1. Header & Navigation (Shadcn Navbar Style)
-- Glassmorphism sticky header with Deep Forest/Emerald Ink branding.
-- Navigation links: Home, Services, About Us, Clinicians, Gallery, FAQ, Contact.
-- Action CTA: "Book Appointment" (Emerald Ink rounded pill button) + Quick Phone call button.
+### 4. Image Showcase & Interactive Component Scaling
+- **Hero Image (`.hero-image-wrap img`)**: Change fixed `440px` height to responsive height (`260px–320px` on mobile) so it fits elegantly within mobile viewports.
+- **Interactive Carousel (`.carousel-slide` & `.carousel-nav-btn`)**:
+  - Adjust mobile slide height to `280px–320px` on `< 480px` screens.
+  - Scale navigation buttons and indicators to avoid overlaying on slide text.
+  - Add touch swipe support for mobile touchscreens.
+- **Interactive Body Map (`.bm-graphic-wrap`)**: Scale height and font sizes for mobile screens.
 
-### 2. Hero Section with Quick Booking Widget
-- Soft Champagne & Jade gradient hero background (`#FAF7F2` → `#F8E7C9`).
-- Headline: *"You'll Love the Way We Care for You — Improving Lives Together"*.
-- Subtitle highlighting evidence-based physical & occupational therapy in Lipa City, Batangas.
-- **Shadcn Quick Booking Bar**: Floating container with Service Select, Location Select, Date Picker, and "Make An Appointment" CTA button.
-- Hero Image: Professional healthcare & physical therapy team.
-
-### 3. Dark Emerald Experience Banner
-- Deep Forest (`#032D22`) full-width or rounded banner.
-- Highlighting over 25 years of combined clinical experience, licensed therapists, and 48-hour new patient guarantee.
-
-### 4. Interactive Image Showcase Carousel (Shadcn Carousel Component)
-- Custom-built, responsive touch-swipe and button-navigated carousel for clinic gallery.
-- Showcase categories: *Clinic Facilities*, *Rehabilitation Area*, *Advanced Equipment*, and *Patient Care*.
-- Interactive prev/next arrows, slide indicators/dots, caption overlays, and category filter tabs.
-
-### 5. Services & Specialties Grid (Shadcn Cards)
-- Modern cards with Champagne (`#F8E7C9`) surface, custom icons, title, description, and "Discover More ->" links with Terracotta hover state.
-- Covers Physical Therapy, Occupational Therapy, Sports Rehab, Pediatric PT, Geriatric Therapy, Neurological PT, and Orthopedic Care.
-
-### 6. Licensed Clinicians / Team Section
-- Profile cards for therapists with photos, names, titles (e.g., Senior Physical Therapist, Licensed Occupational Therapist), credentials, and booking links.
-
-### 7. Interactive Booking Dialog (Shadcn Modal Component)
-- Modal dialog for appointment requests with service, date, time slot, contact info, and confirmation feedback.
-
-### 8. FAQ Accordion (Shadcn Accordion)
-- Smooth expanding/collapsing questions regarding referrals, insurance, first visit expectations, and clinic hours.
+### 5. Sticky Bottom Bar & Modal Dialog Alignment
+- **Mobile Sticky CTA Bar (`.sticky-mobile-cta`)**: Ensure padding and bottom offset match body padding so footer links and form submit buttons remain fully accessible.
+- **Booking Modal Dialog (`.modal-card`)**: Ensure max-height and scrolling behavior are optimized for short landscape mobile screens.
 
 ---
 
 ## User Review Required
 
-> [!IMPORTANT]
-> **Single File HTML Architecture**: The website is contained within [FLEXTEND REVISED 2.html](file:///c:/Users/peral/Documents/flextend/FLEXTEND%20REVISED%202.html). All CSS variables, Shadcn UI component styles, icons, and carousel JavaScript logic will be self-contained within this file to ensure zero external build step dependencies and instant browser playability.
+> [!NOTE]
+> **Zero External Dependencies & Single File Architecture**: All media queries, mobile drawer styling, and mobile toggle JavaScript handlers will be cleanly integrated directly into [index.html](file:///c:/Users/peral/Documents/flextend/index.html).
 
 ---
 
@@ -65,26 +46,23 @@ Redesign the **FlexTend Physical Therapy Clinic** website (`FLEXTEND REVISED 2.h
 
 ### [FlexTend Core Website]
 
-#### [MODIFY] [FLEXTEND REVISED 2.html](file:///c:/Users/peral/Documents/flextend/FLEXTEND%20REVISED%202.html)
-- Replace outdated CSS tokens with the **Emerald Ink & Champagne** 6-color system (`#032D22`, `#064E3B`, `#2E9B7C`, `#F8E7C9`, `#C9A24B`, `#C1663F`).
-- Update Hero layout to match the healthcare UI style image (headline, subtext, floating appointment selector bar, hero clinician image).
-- Implement the Dark Forest (`#032D22`) clinic feature banner.
-- Add the **Shadcn Carousel Component** showcasing clinic facility images, therapy rooms, equipment, and patient care with slide navigation & tab filtering.
-- Implement Shadcn-style Card, Select, Badge, Button, Modal Dialog, and Accordion components.
-- Add mobile sticky CTA bar for one-tap calling (`+63-967-195-6863`), texting, and booking.
+#### [MODIFY] [index.html](file:///c:/Users/peral/Documents/flextend/index.html)
+- Add CSS media queries for `@media (max-width: 768px)`, `@media (max-width: 576px)`, and `@media (max-width: 380px)`.
+- Implement mobile hamburger menu button and slide-out navigation drawer HTML & JS.
+- Refine container padding, grid minmax bounds, heading clamps, image heights, form fields, and carousel controls.
 
 ---
 
 ## Verification Plan
 
 ### Manual Verification
-1. **Visual Style & Color Palette Check**:
-   - Verify all 6 colors (`#032D22`, `#064E3B`, `#2E9B7C`, `#F8E7C9`, `#C9A24B`, `#C1663F`) are applied correctly across header, hero, cards, buttons, badges, and carousel.
-2. **Carousel Component Verification**:
-   - Test Previous/Next slide buttons, indicator dots, category filter tabs, and slide transition smoothness.
-3. **Interactive Components Check**:
-   - Test Shadcn Quick Booking bar selection and "Book Now" modal dialog popup.
-   - Test FAQ accordion open/close animations.
-4. **Responsive Layout Check**:
-   - Test viewport widths: Desktop (1280px+), Tablet (768px), and Mobile (375px).
-   - Ensure sticky mobile CTA bar functions on smaller screens.
+1. **Responsive Viewport Testing**:
+   - Inspect layout on standard mobile sizes: **360px** (Galaxy S20/Android), **375px–390px** (iPhone SE/12/13/14), **414px–430px** (iPhone Max/Plus), and **768px** (Tablet).
+   - Ensure zero horizontal overflow (no sideways scrolling).
+2. **Mobile Navigation Drawer Test**:
+   - Tap mobile hamburger button to open drawer, verify all navigation links jump smoothly to sections, and verify drawer closes when a link or overlay backdrop is tapped.
+3. **Form & Select Field Verification**:
+   - Check input focus state on mobile to ensure no iOS auto-zoom occurs.
+   - Verify inline booking form and modal form inputs on mobile.
+4. **Carousel Touch & Buttons Test**:
+   - Verify carousel buttons and indicator dots scale cleanly without obscuring text on small mobile screens.
