@@ -1162,12 +1162,19 @@
       gap: 16px;
     }
 
-    .faq-question i {
+    .faq-question i,
+    .faq-question svg {
       transition: transform 0.3s ease;
       color: var(--color-emerald-ink);
+      flex-shrink: 0;
+      width: 24px;
+      height: 24px;
+      min-width: 24px;
+      min-height: 24px;
     }
 
-    .faq-item.active .faq-question i {
+    .faq-item.active .faq-question i,
+    .faq-item.active .faq-question svg {
       transform: rotate(180deg);
     }
 
@@ -1303,10 +1310,23 @@
       gap: 12px;
     }
 
+    .footer-links li {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      word-break: break-word;
+      overflow-wrap: anywhere;
+      line-height: 1.5;
+      color: rgba(255, 255, 255, 0.85);
+      font-size: 0.92rem;
+    }
+
     .footer-links a {
       color: rgba(255, 255, 255, 0.8);
       font-size: 0.92rem;
       transition: var(--transition);
+      word-break: break-word;
+      overflow-wrap: anywhere;
     }
 
     .footer-links a:hover {
@@ -1327,7 +1347,9 @@
       display: none;
     }
 
-    /* Responsive Design Breakpoints */
+    /* Responsive Design Breakpoints (Desktop Styles Preserved 100%) */
+
+    /* Tablet Breakpoint (<= 1100px) */
     @media (max-width: 1100px) {
       .hero-grid {
         grid-template-columns: 1fr;
@@ -1366,6 +1388,12 @@
 
       .bodymap-grid {
         grid-template-columns: 1fr;
+        gap: 28px;
+      }
+
+      .book-panel {
+        grid-template-columns: 1fr;
+        gap: 32px;
       }
 
       .footer-grid {
@@ -1373,6 +1401,136 @@
       }
     }
 
+    /* Mobile / Small Tablet Breakpoint (<= 768px) */
+    @media (max-width: 768px) {
+      .container {
+        padding: 0 18px;
+      }
+
+      .navbar {
+        height: 70px;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .hero-card {
+        padding: 24px 18px;
+      }
+
+      .hero-content h1 {
+        font-size: 2.1rem;
+      }
+
+      .booking-bar {
+        grid-template-columns: 1fr;
+      }
+
+      .carousel-slide {
+        height: 340px;
+      }
+
+      .slide-overlay {
+        padding: 18px;
+      }
+
+      .slide-title {
+        font-size: 1.25rem;
+      }
+
+      .treat-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+
+      .services-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .team-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+
+      .team-img-wrap {
+        height: 260px;
+      }
+
+      .book-panel {
+        padding: 24px 18px;
+      }
+
+      .faq-question {
+        padding: 16px 18px;
+        font-size: 0.98rem;
+        gap: 12px;
+      }
+
+      .faq-answer {
+        padding: 0 18px;
+        font-size: 0.92rem;
+      }
+
+      .faq-item.active .faq-answer {
+        padding: 0 18px 18px;
+      }
+
+      .faq-question i,
+      .faq-question svg {
+        width: 22px;
+        height: 22px;
+        min-width: 22px;
+        min-height: 22px;
+        flex-shrink: 0;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+
+      .sticky-mobile-cta {
+        display: flex;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 90;
+        background: var(--color-deep-forest);
+        box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.25);
+      }
+
+      .sticky-mobile-cta a,
+      .sticky-mobile-cta button {
+        flex: 1;
+        padding: 14px 8px;
+        color: #ffffff;
+        background: transparent;
+        border: none;
+        outline: none;
+        font-weight: 700;
+        font-size: 0.88rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        border-right: 1px solid rgba(255, 255, 255, 0.12);
+        cursor: pointer;
+      }
+
+      .sticky-mobile-cta button.sticky-book-btn {
+        background: var(--color-jade);
+        color: #ffffff;
+      }
+
+      body {
+        padding-bottom: 60px;
+      }
+    }
+
+    /* Mobile Breakpoint (<= 640px) */
     @media (max-width: 640px) {
       .booking-bar {
         grid-template-columns: 1fr;
@@ -1396,68 +1554,58 @@
         width: 100%;
         padding: 14px 20px;
       }
+
+      .modal-card {
+        padding: 24px 18px;
+        width: 92vw;
+        max-width: 480px;
+      }
     }
 
-    @media (max-width: 768px) {
-      .navbar {
-        height: 70px;
-      }
-
-      .nav-links {
-        display: none;
-      }
-
-      .hero-card {
-        padding: 28px 20px;
+    /* Small Mobile Breakpoint (<= 480px) */
+    @media (max-width: 480px) {
+      .container {
+        padding: 0 14px;
       }
 
       .hero-content h1 {
-        font-size: 2.2rem;
+        font-size: 1.85rem;
       }
 
-      .booking-bar {
-        grid-template-columns: 1fr;
+      .hero-card {
+        padding: 20px 14px;
       }
 
       .carousel-slide {
-        height: 380px;
+        height: 290px;
       }
 
-      .slide-overlay {
-        padding: 20px;
+      .bodymap-card {
+        padding: 20px 14px;
       }
 
-      .slide-title {
-        font-size: 1.3rem;
+      .treat-img-wrap {
+        height: 180px;
       }
 
-      .sticky-mobile-cta {
-        display: flex;
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        z-index: 90;
-        background: var(--color-deep-forest);
-        box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.25);
+      .treat-card-body {
+        padding: 20px 16px;
       }
 
-      .sticky-mobile-cta a,
-      .sticky-mobile-cta button {
-        flex: 1;
-        padding: 14px 8px;
-        color: #ffffff;
-        font-weight: 700;
-        font-size: 0.88rem;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 6px;
-        border-right: 1px solid rgba(255, 255, 255, 0.12);
+      .treat-card-title {
+        font-size: 1.45rem;
       }
 
-      body {
-        padding-bottom: 60px;
+      .service-card {
+        padding: 20px 16px;
+      }
+
+      .team-card-body {
+        padding: 20px 16px;
+      }
+
+      .book-form-card {
+        padding: 20px 16px;
       }
     }
 
@@ -2569,12 +2717,12 @@
         <div>
           <h4 class="footer-title">Contact & Hours</h4>
           <ul class="footer-links">
-            <li>📍 <a href="https://maps.app.goo.gl/QBoQGC5gAwqWQKBH9" target="_blank" rel="noopener noreferrer" style="color: rgba(255, 255, 255, 0.92); text-decoration: underline;">299 San Jose Subd., Balagbag, Brgy. San Sebastian, Lipa City, Batangas 4217</a></li>
-            <li>📞 <a href="tel:+639671956863">+63 967 195 6863</a></li>
-            <li>✉️ <a
+            <li><span style="flex-shrink: 0;">📍</span> <a href="https://maps.app.goo.gl/QBoQGC5gAwqWQKBH9" target="_blank" rel="noopener noreferrer" style="color: rgba(255, 255, 255, 0.92); text-decoration: underline;">299 San Jose Subd., Balagbag, Brgy. San Sebastian, Lipa City, Batangas 4217</a></li>
+            <li><span style="flex-shrink: 0;">📞</span> <a href="tel:+639671956863">+63 967 195 6863</a></li>
+            <li><span style="flex-shrink: 0;">✉️</span> <a
                 href="https://mail.google.com/mail/?view=cm&fs=1&to=flextendtherapy2024@gmail.com" target="_blank" rel="noopener noreferrer">flextendtherapy2024@gmail.com</a>
             </li>
-            <li>🕒 Mon – Sat: 8:00 AM – 4:00 PM</li>
+            <li><span style="flex-shrink: 0;">🕒</span> <span>Mon – Sat: 8:00 AM – 4:00 PM</span></li>
           </ul>
         </div>
       </div>
@@ -2591,7 +2739,7 @@
     <a href="tel:+639671956863">
       <i data-lucide="phone"></i> Call Clinic
     </a>
-    <button onclick="openBookingModal()">
+    <button class="sticky-book-btn" onclick="openBookingModal()">
       <i data-lucide="calendar"></i> Book Now
     </button>
     <a href="sms:+639671956863">

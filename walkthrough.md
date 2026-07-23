@@ -348,3 +348,30 @@ The **FlexTend Physical Therapy Clinic** website ([index.html](file:///c:/Users/
 - **Solution**:
   - Added the `readonly` attribute to the `#modal-service` input field (`Requested Service / Focus Area`) in the appointment booking modal.
   - Applied `cursor: not-allowed; background-color: #f8faf9; color: var(--color-deep-forest); font-weight: 700;` to prevent user text editing while maintaining high legibility.
+
+### 49. Footer Mobile Responsiveness & Text Overflow Fix
+- **Request**: FIX THIS PART IN MOBILE VERSION FOR MOBILE RESPONSIVENESS
+- **Solution**:
+  - Configured `.footer-grid` to stack into a single clean column (`grid-template-columns: 1fr`) on screens `<= 768px`, eliminating horizontal grid overflow.
+  - Added `word-break: break-word; overflow-wrap: anywhere;` to `.footer-links li` and `.footer-links a` so long emails and addresses wrap smoothly within mobile viewport bounds.
+  - Applied flex layout with `flex-shrink: 0` icon spans to `.footer-links li` ensuring icons stay aligned while text wraps neatly beside them.
+
+### 50. Comprehensive Mobile Responsiveness Audit & Card Sizing
+- **Request**: lets plan this out, use orchestrator to check every section for mobile responsiveness. adjust cards size etc. also do not modify desktop styling always use Use a media query to add a breakpoint
+- **Solution**:
+  - Maintained **100% desktop CSS isolation** — zero base desktop styles were modified.
+  - Added structured media queries for `@media (max-width: 1100px)`, `@media (max-width: 768px)`, `@media (max-width: 640px)`, and `@media (max-width: 480px)` in `index.html`.
+  - Optimized mobile card sizes, image container heights (`.treat-img-wrap: 180px`, `.team-img-wrap: 260px`, `.carousel-slide: 290px`), card body paddings (`20px 16px`), and title font sizes (`1.45rem`) for seamless readability and zero horizontal scroll on all mobile devices.
+
+### 51. Mobile FAQ Accordion Chevron Arrows Uniform Sizing
+- **Request**: FIX THE ARROWS IN THE MOBILE VIEW
+- **Solution**:
+  - Added `flex-shrink: 0`, `width: 24px`, `height: 24px`, `min-width: 24px`, `min-height: 24px` to `.faq-question i` and `.faq-question svg` in `index.html`.
+  - Added responsive scaling (`22px` width/height and `flex-shrink: 0`) under `@media (max-width: 768px)`.
+  - Prevented multi-line question text from squishing or shrinking chevron icons, ensuring every FAQ arrow stays perfectly sized and aligned across mobile viewports.
+
+### 52. Sticky Mobile CTA "Book Now" Button Color & Contrast Fix
+- **Request**: FIX THE COLOR OF BOOK NOW BUTTON
+- **Solution**:
+  - Applied `background: transparent; border: none;` reset to `.sticky-mobile-cta button` in `index.html` to eliminate browser user-agent white/grey background defaults.
+  - Added dedicated `.sticky-book-btn` styling with vibrant jade green background (`var(--color-jade)` / `#2E9B7C`) and white bold text (`#ffffff`), making "Book Now" stand out as a high-contrast primary CTA on mobile.
