@@ -1576,6 +1576,13 @@
       margin-top: 2px;
     }
 
+    .treat-card-desc {
+      font-size: 0.98rem;
+      color: var(--text-muted);
+      line-height: 1.65;
+      margin-top: 6px;
+    }
+
     .treat-pills-wrap {
       display: flex;
       flex-wrap: wrap;
@@ -2024,24 +2031,9 @@
             <div class="treat-card-body">
               <span class="treat-badge-pt">Physical Therapy</span>
               <h3 class="treat-card-title">Musculoskeletal & orthopedic</h3>
-              <div class="treat-pills-wrap">
-                <span class="treat-pill" onclick="openBookingModal('Musculoskeletal: Fracture')">Fracture</span>
-                <span class="treat-pill"
-                  onclick="openBookingModal('Musculoskeletal: Total/partial hip replacement')">Total/partial hip
-                  replacement</span>
-                <span class="treat-pill" onclick="openBookingModal('Musculoskeletal: Frozen shoulder')">Frozen
-                  shoulder</span>
-                <span class="treat-pill" onclick="openBookingModal('Musculoskeletal: Arthritis')">Arthritis</span>
-                <span class="treat-pill" onclick="openBookingModal('Musculoskeletal: Hip, knee & back pain')">Hip, knee
-                  & back pain</span>
-                <span class="treat-pill" onclick="openBookingModal('Musculoskeletal: Scoliosis')">Scoliosis</span>
-                <span class="treat-pill"
-                  onclick="openBookingModal('Musculoskeletal: Generalized body weakness')">Generalized body
-                  weakness</span>
-                <span class="treat-pill"
-                  onclick="openBookingModal('Musculoskeletal: Myofascial pain syndrome')">Myofascial pain
-                  syndrome</span>
-              </div>
+              <p class="treat-card-desc">
+                Specialized physical therapy for bones, muscles, joints, ligaments, and spine conditions. We design targeted rehabilitation plans to restore pain-free movement, rebuild muscular strength, improve joint alignment, and accelerate recovery from orthopedic surgeries, trauma, and chronic pain.
+              </p>
             </div>
           </div>
 
@@ -2054,23 +2046,9 @@
             <div class="treat-card-body">
               <span class="treat-badge-pt">PT + OT</span>
               <h3 class="treat-card-title">Neurologic cases</h3>
-              <div class="treat-pills-wrap">
-                <span class="treat-pill" onclick="openBookingModal('Neurologic: Bell\'s palsy')">Bell's palsy</span>
-                <span class="treat-pill" onclick="openBookingModal('Neurologic: Stroke')">Stroke</span>
-                <span class="treat-pill" onclick="openBookingModal('Neurologic: Spinal cord injury')">Spinal cord
-                  injury</span>
-                <span class="treat-pill" onclick="openBookingModal('Neurologic: Traumatic brain injury')">Traumatic
-                  brain injury</span>
-                <span class="treat-pill"
-                  onclick="openBookingModal('Neurologic: Parkinson\'s disease / PSP')">Parkinson's disease / PSP</span>
-                <span class="treat-pill" onclick="openBookingModal('Neurologic: Multiple sclerosis')">Multiple
-                  sclerosis</span>
-                <span class="treat-pill"
-                  onclick="openBookingModal('Neurologic: Guillain-BarrÃ© syndrome')">Guillain-BarrÃ© syndrome</span>
-                <span class="treat-pill"
-                  onclick="openBookingModal('Neurologic: Amyotrophic lateral sclerosis')">Amyotrophic lateral
-                  sclerosis</span>
-              </div>
+              <p class="treat-card-desc">
+                Comprehensive neurological rehabilitation combining physical and occupational therapy to address conditions affecting the brain, spinal cord, and nervous system. Utilizing neuroplasticity principles, we help patients recover movement control, improve balance and gait safety, manage muscle spasticity, and regain functional independence after stroke, brain injury, or nerve disorders.
+              </p>
             </div>
           </div>
 
@@ -2083,10 +2061,9 @@
             <div class="treat-card-body">
               <span class="treat-badge-ot">Occupational Therapy</span>
               <h3 class="treat-card-title">Pediatric cases</h3>
-              <div class="treat-pills-wrap">
-                <span class="treat-pill" onclick="openBookingModal('Pediatric Rehabilitation')">Pediatric rehabilitation
-                  & motor milestones</span>
-              </div>
+              <p class="treat-card-desc">
+                Specialized pediatric physical and occupational therapy tailored for infants, children, and adolescents. Our compassionate clinicians utilize play-based interventions to support developmental motor milestones, enhance sensory integration, improve muscle tone and coordination, and empower children to achieve physical independence.
+              </p>
             </div>
           </div>
         </div>
@@ -2423,46 +2400,19 @@
             </p>
 
             <div style="display: flex; flex-direction: column; gap: 24px;">
-              <!-- Call us -->
-              <div class="book-contact-item">
-                <div class="book-contact-icon">
-                  <i data-lucide="phone" size="20"></i>
-                </div>
-                <div>
-                  <div class="book-contact-label">Call us</div>
-                  <div class="book-contact-val"><a href="tel:+639671956863"
-                      style="color: var(--color-deep-forest); text-decoration: underline;">0967 195 6863</a> / <a
-                      href="tel:+639064574530" style="color: var(--color-deep-forest); text-decoration: underline;">0906
-                      457 4530</a></div>
-                </div>
-              </div>
-
-              <!-- Email -->
-              <div class="book-contact-item">
-                <div class="book-contact-icon">
-                  <i data-lucide="mail" size="20"></i>
-                </div>
-                <div>
-                  <div class="book-contact-label">Email</div>
-                  <div class="book-contact-val"><a
-                      href="https://mail.google.com/mail/?view=cm&fs=1&to=flextendtherapy2024@gmail.com" target="_blank"
-                      style="color: var(--color-deep-forest); text-decoration: underline;">flextendtherapy2024@gmail.com</a>
-                  </div>
-                </div>
-              </div>
 
               <!-- Visit -->
               <div class="book-contact-item">
-                <div class="book-contact-icon">
+                <a href="https://maps.app.goo.gl/QBoQGC5gAwqWQKBH9" target="_blank" rel="noopener noreferrer" class="book-contact-icon" style="text-decoration: none;">
                   <i data-lucide="map-pin" size="20"></i>
-                </div>
+                </a>
                 <div>
                   <div class="book-contact-label">Visit</div>
                   <div class="book-contact-val">
-                    <a href="https://maps.app.goo.gl/QBoQGC5gAwqWQKBH9" target="_blank"
-                      style="color: var(--color-deep-forest); text-decoration: none;">
+                    <a href="https://maps.app.goo.gl/QBoQGC5gAwqWQKBH9" target="_blank" rel="noopener noreferrer"
+                      style="color: var(--color-deep-forest); text-decoration: underline;">
                       299 San Jose Subdivision Balagbag Brgy. San Sebastian , Lipa City, Philippines, 4217
-                    </a> &mdash; <a href="https://maps.app.goo.gl/QBoQGC5gAwqWQKBH9" target="_blank"
+                    </a> &mdash; <a href="https://maps.app.goo.gl/QBoQGC5gAwqWQKBH9" target="_blank" rel="noopener noreferrer"
                       style="color: var(--color-emerald-ink); font-weight: 700; text-decoration: underline;">get
                       directions</a>
                   </div>
@@ -2559,7 +2509,7 @@
       <form id="appointment-form" onsubmit="handleFormSubmit(event)">
         <div class="form-group">
           <label class="form-label">Requested Service / Focus Area</label>
-          <input type="text" class="form-input" id="modal-service" value="Physical Therapy Evaluation" required>
+          <input type="text" class="form-input" id="modal-service" value="Physical Therapy Evaluation" readonly style="background-color: #f8faf9; color: var(--color-deep-forest); font-weight: 700; cursor: not-allowed; border-color: var(--border-light);" required>
         </div>
 
         <div class="form-group">
@@ -2619,10 +2569,10 @@
         <div>
           <h4 class="footer-title">Contact & Hours</h4>
           <ul class="footer-links">
-            <li>📍 299 San Jose Subd., Balagbag, Brgy. San Sebastian, Lipa City, Batangas 4217</li>
+            <li>📍 <a href="https://maps.app.goo.gl/QBoQGC5gAwqWQKBH9" target="_blank" rel="noopener noreferrer" style="color: rgba(255, 255, 255, 0.92); text-decoration: underline;">299 San Jose Subd., Balagbag, Brgy. San Sebastian, Lipa City, Batangas 4217</a></li>
             <li>📞 <a href="tel:+639671956863">+63 967 195 6863</a></li>
             <li>✉️ <a
-                href="https://mail.google.com/mail/?view=cm&fs=1&to=flextendtherapy2024@gmail.com">flextendtherapy2024@gmail.com</a>
+                href="https://mail.google.com/mail/?view=cm&fs=1&to=flextendtherapy2024@gmail.com" target="_blank" rel="noopener noreferrer">flextendtherapy2024@gmail.com</a>
             </li>
             <li>🕒 Mon – Sat: 8:00 AM – 4:00 PM</li>
           </ul>

@@ -312,3 +312,39 @@ The **FlexTend Physical Therapy Clinic** website ([index.html](file:///c:/Users/
 - **Solution**:
   - Updated `.treat-card` CSS rule `background` from `#FAF5EC` (light champagne beige) to `#ffffff` (pure white).
   - The 3 specialty cards (*Musculoskeletal & orthopedic*, *Neurologic cases*, *Pediatric cases*) now render with clean, crisp white card surfaces framed by gold accent borders (`rgba(201, 162, 75, 0.25)`).
+
+### 43. Musculoskeletal & Orthopedic Card Pill Group Replacement
+- **Request**: REMOVE THE FRACTURE AND THE GROUPS, REPLACE IT WITH ONLY THE DESCRIPTION OF MUSCULOSKELETAL & ORTHOPEDIC
+- **Solution**:
+  - Removed all individual condition pills (`Fracture`, `Total/partial hip replacement`, `Frozen shoulder`, `Arthritis`, `Hip, knee & back pain`, `Scoliosis`, `Generalized body weakness`, `Myofascial pain syndrome`) from Card 1 in `index.html`.
+  - Replaced the pill group with a comprehensive clinical description paragraph (`.treat-card-desc`): *"Specialized physical therapy for bones, muscles, joints, ligaments, and spine conditions. We design targeted rehabilitation plans to restore pain-free movement, rebuild muscular strength, improve joint alignment, and accelerate recovery from orthopedic surgeries, trauma, and chronic pain."*
+
+### 44. Neurologic Cases Card Pill Group Replacement
+- **Request**: REMOVE THE BELLS PALSY AND THE GROUP, REPLACE IT WITH ONLY THE DESCRIPTION OF NEUROLOGIC CASES
+- **Solution**:
+  - Removed all individual condition pills (`Bell's palsy`, `Stroke`, `Spinal cord injury`, `Traumatic brain injury`, `Parkinson's disease / PSP`, `Multiple sclerosis`, `Guillain-Barré syndrome`, `Amyotrophic lateral sclerosis`) from Card 2 in `index.html`.
+  - Replaced the pill group with a comprehensive clinical description paragraph (`.treat-card-desc`): *"Comprehensive neurological rehabilitation combining physical and occupational therapy to address conditions affecting the brain, spinal cord, and nervous system. Utilizing neuroplasticity principles, we help patients recover movement control, improve balance and gait safety, manage muscle spasticity, and regain functional independence after stroke, brain injury, or nerve disorders."*
+
+### 45. Pediatric Cases Card Pill Replacement
+- **Request**: REMOVE THE PEDIATRIC REHABILITATION & MOTOR MILESTONE, REPLACE IT WITH ONLY THE DESCRIPTION OF PEDIATRIC CASES
+- **Solution**:
+  - Removed the `Pediatric rehabilitation & motor milestones` pill tag from Card 3 in `index.html`.
+  - Replaced the pill with a comprehensive clinical description paragraph (`.treat-card-desc`): *"Specialized pediatric physical and occupational therapy tailored for infants, children, and adolescents. Our compassionate clinicians utilize play-based interventions to support developmental motor milestones, enhance sensory integration, improve muscle tone and coordination, and empower children to achieve physical independence."*
+
+### 46. Book Appointment Contact Info Streamlining
+- **Request**: REMOVE THE CALL US & THE NUMBERS, EMAIL
+- **Solution**:
+  - Removed the `Call us` (phone numbers `0967 195 6863 / 0906 457 4530`) and `Email` (`flextendtherapy2024@gmail.com`) contact items from the left column of the *Book your first appointment* section in `index.html`.
+  - Retained the `Visit` location link and `Hours` block for a clean, focused booking interface.
+
+### 47. Instant Google Maps Direct Links
+- **Request**: MAKE THE MAPS CLICKABLE AND WILL REDIRECT INSTANTLY TO GOOGLE MAPS
+- **Solution**:
+  - Wrapped the footer location address (`299 San Jose Subd., Balagbag, Brgy. San Sebastian, Lipa City, Batangas 4217`) in a direct `<a href="https://maps.app.goo.gl/QBoQGC5gAwqWQKBH9" target="_blank">` link.
+  - Wrapped the *Book Appointment* section location text, pin icon, and *get directions* link in direct Google Maps links that open instantly in a new tab.
+
+### 48. Disabled Editing on Requested Service Modal Field
+- **Request**: DISABLE EDITING IN THIS AREA
+- **Solution**:
+  - Added the `readonly` attribute to the `#modal-service` input field (`Requested Service / Focus Area`) in the appointment booking modal.
+  - Applied `cursor: not-allowed; background-color: #f8faf9; color: var(--color-deep-forest); font-weight: 700;` to prevent user text editing while maintaining high legibility.
