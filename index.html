@@ -1217,14 +1217,18 @@
     .modal-card {
       background: #ffffff;
       border-radius: var(--radius-lg);
-      max-width: 580px;
+      max-width: 640px;
       width: 100%;
-      padding: 36px;
+      padding: 24px 28px 28px;
       box-shadow: var(--shadow-lg);
       position: relative;
       transform: scale(0.92);
       transition: var(--transition);
       border: 1px solid var(--border-accent);
+      max-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
     }
 
     .modal-backdrop.active .modal-card {
@@ -1233,10 +1237,10 @@
 
     .modal-close {
       position: absolute;
-      top: 20px;
-      right: 20px;
-      width: 36px;
-      height: 36px;
+      top: 18px;
+      right: 18px;
+      width: 34px;
+      height: 34px;
       border-radius: var(--radius-full);
       background: rgba(6, 78, 59, 0.08);
       display: flex;
@@ -1244,6 +1248,152 @@
       justify-content: center;
       color: var(--color-deep-forest);
       cursor: pointer;
+      z-index: 10;
+      transition: var(--transition);
+    }
+
+    .modal-close:hover {
+      background: rgba(6, 78, 59, 0.18);
+    }
+
+    /* 2-Slide Navigation Stepper */
+    .modal-stepper {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border-light);
+      padding-bottom: 12px;
+      margin-bottom: 16px;
+      padding-right: 40px;
+    }
+
+    .step-tab {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      cursor: pointer;
+      padding: 6px 12px;
+      border-radius: var(--radius-full);
+      transition: var(--transition);
+      background: transparent;
+      border: none;
+    }
+
+    .step-tab.active {
+      color: var(--color-emerald-ink);
+      background: rgba(6, 78, 59, 0.08);
+    }
+
+    .step-num {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: var(--text-light);
+      color: #ffffff;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
+
+    .step-tab.active .step-num {
+      background: var(--color-emerald-ink);
+    }
+
+    .modal-slides-viewport {
+      width: 100%;
+      overflow: hidden;
+      flex: 1;
+    }
+
+    .modal-slides-track {
+      display: flex;
+      width: 200%;
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .modal-slide {
+      width: 50%;
+      flex-shrink: 0;
+      padding: 4px 6px;
+      max-height: 72vh;
+      overflow-y: auto;
+    }
+
+    .calendly-direct-banner {
+      background: rgba(46, 155, 124, 0.1);
+      border: 1px solid var(--border-accent);
+      border-radius: var(--radius-md);
+      padding: 10px 14px;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      font-size: 0.85rem;
+      color: var(--color-deep-forest);
+      font-weight: 500;
+      flex-wrap: wrap;
+    }
+
+    .calendly-link-pill {
+      background: var(--color-emerald-ink);
+      color: #ffffff !important;
+      font-weight: 700;
+      padding: 6px 14px;
+      border-radius: var(--radius-full);
+      text-decoration: none;
+      font-size: 0.82rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      transition: var(--transition);
+      white-space: nowrap;
+    }
+
+    .calendly-link-pill:hover {
+      background: var(--color-deep-forest);
+      transform: translateY(-1px);
+    }
+
+    .calendly-iframe-container {
+      width: 100%;
+      height: 440px;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      border: 1px solid var(--border-light);
+      background: #fafafa;
+      margin-top: 10px;
+    }
+
+    .calendly-iframe-container iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    .back-slide-btn {
+      background: none;
+      border: none;
+      color: var(--color-emerald-ink);
+      font-weight: 700;
+      font-size: 0.88rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 8px;
+      border-radius: var(--radius-sm);
+      transition: var(--transition);
+      margin-bottom: 8px;
+    }
+
+    .back-slide-btn:hover {
+      background: rgba(6, 78, 59, 0.08);
     }
 
     .form-group {
@@ -1556,9 +1706,24 @@
       }
 
       .modal-card {
-        padding: 24px 18px;
-        width: 92vw;
+        padding: 20px 14px 18px;
+        width: 95vw;
         max-width: 480px;
+        max-height: 94vh;
+      }
+
+      .modal-stepper {
+        padding-right: 32px;
+        margin-bottom: 12px;
+      }
+
+      .step-tab {
+        font-size: 0.78rem;
+        padding: 4px 8px;
+      }
+
+      .calendly-iframe-container {
+        height: 380px;
       }
     }
 
@@ -2635,10 +2800,15 @@
                   placeholder="A short description of your symptoms or goals..."></textarea>
               </div>
 
-              <!-- Submit Button -->
-              <button type="submit" class="book-submit-btn">
-                Request appointment
-              </button>
+              <!-- Submit Buttons Row with Calendly Integration -->
+              <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 4px;">
+                <button type="submit" class="book-submit-btn">
+                  Continue to Booking & Calendly →
+                </button>
+                <button type="button" onclick="openBookingModal('Physical Therapy Evaluation', 2)" class="book-submit-btn" style="background: var(--color-deep-forest); border-color: var(--color-deep-forest);">
+                  <i data-lucide="calendar" size="16"></i> Open Calendly Scheduler Directly ↗
+                </button>
+              </div>
 
               <div style="font-size: 0.8rem; text-align: center; color: var(--text-muted); margin-top: 2px;">
                 We'll confirm within one business day. Your information stays private.
@@ -2650,47 +2820,118 @@
     </section>
   </main>
 
-  <!-- Interactive Shadcn Booking Modal Dialog -->
+  <!-- Interactive 2-Slide Booking Modal Dialog with Embedded Calendly -->
   <div class="modal-backdrop" id="booking-modal">
     <div class="modal-card">
       <div class="modal-close" onclick="closeBookingModal()">
         <i data-lucide="x"></i>
       </div>
-      <h3
-        style="font-family: var(--font-heading); font-size: 1.6rem; color: var(--color-deep-forest); margin-bottom: 6px;">
-        Schedule Your Appointment
-      </h3>
-      <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 24px;">
-        Fill out the details below to request a session with a licensed clinician at FlexTend.
-      </p>
 
-      <form id="appointment-form" onsubmit="handleFormSubmit(event)">
-        <div class="form-group">
-          <label class="form-label">Requested Service / Focus Area</label>
-          <input type="text" class="form-input" id="modal-service" value="Physical Therapy Evaluation" readonly
-            style="background-color: #f8faf9; color: var(--color-deep-forest); font-weight: 700; cursor: not-allowed; border-color: var(--border-light);"
-            required>
-        </div>
-
-        <div class="form-group">
-          <label class="form-label">Full Name</label>
-          <input type="text" class="form-input" placeholder="e.g. Maria Santos" required>
-        </div>
-
-        <div class="form-group">
-          <label class="form-label">Phone Number</label>
-          <input type="tel" class="form-input" placeholder="+63 9XX XXX XXXX" required>
-        </div>
-
-        <div class="form-group">
-          <label class="form-label">Preferred Date & Time</label>
-          <input type="datetime-local" class="form-input" required>
-        </div>
-
-        <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 12px;">
-          Confirm Booking Request
+      <!-- Step Indicator Header -->
+      <div class="modal-stepper">
+        <button class="step-tab active" id="tab-step-1" onclick="goToBookingSlide(1)">
+          <span class="step-num">1</span>
+          <span>1. Intake Details</span>
         </button>
-      </form>
+        <div style="flex:1; height:2px; background: var(--border-light); margin: 0 4px;"></div>
+        <button class="step-tab" id="tab-step-2" onclick="goToBookingSlide(2)">
+          <span class="step-num">2</span>
+          <span>2. Calendly Scheduler</span>
+        </button>
+      </div>
+
+      <!-- Slides Viewport -->
+      <div class="modal-slides-viewport">
+        <div class="modal-slides-track" id="modal-slides-track">
+
+          <!-- SLIDE 1: Intake & Service Info -->
+          <div class="modal-slide" id="slide-1">
+            <h3 style="font-family: var(--font-heading); font-size: 1.45rem; color: var(--color-deep-forest); margin-bottom: 4px;">
+              Schedule Your Appointment
+            </h3>
+            <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 14px;">
+              Fill out your details below, then select your preferred live time slot on Calendly.
+            </p>
+
+            <!-- Quick Calendly Direct Link Banner -->
+            <div class="calendly-direct-banner">
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <i data-lucide="calendar" size="18" style="color: var(--color-emerald-ink); flex-shrink: 0;"></i>
+                <span>Want to schedule on Calendly directly?</span>
+              </div>
+              <a href="https://calendly.com/flextendtherapy2024" target="_blank" rel="noopener noreferrer" class="calendly-link-pill">
+                Open Calendly ↗
+              </a>
+            </div>
+
+            <form id="appointment-form" onsubmit="handleFormSubmit(event)">
+              <div class="form-group">
+                <label class="form-label">Requested Service / Focus Area</label>
+                <input type="text" class="form-input" id="modal-service" value="Physical Therapy Evaluation" readonly
+                  style="background-color: #f8faf9; color: var(--color-deep-forest); font-weight: 700; cursor: not-allowed; border-color: var(--border-light);"
+                  required>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Full Name</label>
+                <input type="text" class="form-input" id="modal-fullname" placeholder="e.g. Maria Santos" required>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Phone Number</label>
+                <input type="tel" class="form-input" id="modal-phone" placeholder="+63 9XX XXX XXXX" required>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Email Address</label>
+                <input type="email" class="form-input" id="modal-email" placeholder="maria@example.com">
+              </div>
+
+              <div style="display: flex; gap: 10px; margin-top: 18px; flex-wrap: wrap;">
+                <a href="https://calendly.com/flextendtherapy2024" target="_blank" rel="noopener noreferrer" class="btn btn-outline" style="flex: 1; text-align: center; justify-content: center; text-decoration: none; font-size: 0.85rem; padding: 10px 12px; min-width: 140px;">
+                  <i data-lucide="external-link" size="15"></i> Calendly Link ↗
+                </a>
+                <button type="button" onclick="goToBookingSlide(2)" class="btn btn-primary" style="flex: 1.5; justify-content: center; min-width: 180px;">
+                  Next: Calendly Schedule →
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <!-- SLIDE 2: Embedded Calendly Scheduler -->
+          <div class="modal-slide" id="slide-2">
+            <button type="button" class="back-slide-btn" onclick="goToBookingSlide(1)">
+              <i data-lucide="arrow-left" size="16"></i> Back to Intake Details
+            </button>
+
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; flex-wrap: wrap; gap: 8px;">
+              <div>
+                <h3 style="font-family: var(--font-heading); font-size: 1.35rem; color: var(--color-deep-forest); margin-bottom: 2px;">
+                  Select Appointment Time Slot
+                </h3>
+                <p style="font-size: 0.84rem; color: var(--text-muted);">
+                  Pick a convenient day & time via FlexTend's live Calendly portal.
+                </p>
+              </div>
+              <a href="https://calendly.com/flextendtherapy2024" target="_blank" rel="noopener noreferrer" class="calendly-link-pill" style="font-size: 0.78rem;">
+                New Tab ↗
+              </a>
+            </div>
+
+            <!-- Calendly Live Iframe Container -->
+            <div class="calendly-iframe-container">
+              <iframe id="calendly-frame" src="https://calendly.com/flextendtherapy2024" title="FlexTend Calendly Booking Scheduler"></iframe>
+            </div>
+
+            <div style="margin-top: 12px; display: flex; gap: 10px;">
+              <button type="button" onclick="closeBookingModal()" class="btn btn-secondary" style="width: 100%; justify-content: center;">
+                Complete & Close
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </div>
     </div>
   </div>
 
@@ -2879,31 +3120,62 @@
       }
     }
 
-    // Modal Booking Dialog Logic
-    function openBookingModal(serviceName = 'Physical Therapy Evaluation') {
-      document.getElementById('modal-service').value = serviceName;
+    // Modal Booking Dialog & 2-Slide Calendly Logic
+    const CALENDLY_URL = "https://calendly.com/flextendtherapy2024";
+
+    function openBookingModal(serviceName = 'Physical Therapy Evaluation', slide = 1) {
+      const modalServiceInput = document.getElementById('modal-service');
+      if (modalServiceInput) {
+        modalServiceInput.value = serviceName;
+      }
       document.getElementById('booking-modal').classList.add('active');
+      goToBookingSlide(slide);
+      if (window.lucide) {
+        lucide.createIcons();
+      }
     }
 
     function closeBookingModal() {
       document.getElementById('booking-modal').classList.remove('active');
     }
 
+    function goToBookingSlide(slideNum) {
+      const track = document.getElementById('modal-slides-track');
+      const tab1 = document.getElementById('tab-step-1');
+      const tab2 = document.getElementById('tab-step-2');
+      const iframe = document.getElementById('calendly-frame');
+
+      if (slideNum === 2) {
+        if (track) track.style.transform = 'translateX(-50%)';
+        if (tab1) tab1.classList.remove('active');
+        if (tab2) tab2.classList.add('active');
+        if (iframe && (!iframe.src || iframe.src === '' || iframe.src === 'about:blank')) {
+          iframe.src = CALENDLY_URL;
+        }
+      } else {
+        if (track) track.style.transform = 'translateX(0%)';
+        if (tab1) tab1.classList.add('active');
+        if (tab2) tab2.classList.remove('active');
+      }
+    }
+
     function handleQuickBook() {
-      const service = document.getElementById('quick-service').value;
-      openBookingModal(service);
+      const serviceSelect = document.getElementById('quick-service');
+      const service = serviceSelect ? serviceSelect.value : 'Physical Therapy Evaluation';
+      openBookingModal(service, 1);
     }
 
     function handleInlineBookSubmit(event) {
       event.preventDefault();
-      showToast("Appointment Request Sent!", "Thank you! Our clinical team will confirm your session within 1 business day.");
-      event.target.reset();
+      const form = event.target;
+      const serviceSelect = form.querySelector('.book-form-select');
+      const chosenService = serviceSelect ? serviceSelect.value : 'Physical Therapy Evaluation';
+      openBookingModal(chosenService, 2);
     }
 
     function handleFormSubmit(event) {
       event.preventDefault();
-      alert('Thank you for booking with FlexTend Physical Therapy! Our clinical coordinator will contact you shortly to confirm your schedule.');
-      closeBookingModal();
+      goToBookingSlide(2);
     }
   </script>
 </body>
