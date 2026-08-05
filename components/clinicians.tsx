@@ -3,6 +3,9 @@ import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { Award, CheckCircle, Users } from "lucide-react";
 
+const FALLBACK_CLINICIAN_IMAGE =
+  "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=600&q=80";
+
 export function Clinicians() {
   const team = [
     {
@@ -11,7 +14,7 @@ export function Clinicians() {
       license: "PRC Licensed Clinical Staff",
       bio: "Extensive clinical training in orthopedic assessment, spine manual therapy, post-surgical recovery, and sports biomechanics.",
       specialties: ["Orthopedic Rehab", "Spine Manual Therapy", "Dry Needling", "Sports Injury Recovery"],
-      image: "https://images.unsplash.com/photo-1594824813570-78a33595eb61?auto=format&fit=crop&w=600&q=80",
+      image: FALLBACK_CLINICIAN_IMAGE,
     },
     {
       name: "Licensed Occupational Therapists (OTRP)",
@@ -60,6 +63,11 @@ export function Clinicians() {
                   src={member.image}
                   alt={member.name}
                   className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  onError={(event) => {
+                    const image = event.currentTarget;
+                    image.onerror = null;
+                    image.src = FALLBACK_CLINICIAN_IMAGE;
+                  }}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#032D22]/85 via-transparent to-transparent" />
                 <Badge variant="gold" className="absolute top-4 left-4 font-bold">

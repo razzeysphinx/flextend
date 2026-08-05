@@ -376,14 +376,6 @@ The **FlexTend Physical Therapy Clinic** website ([index.html](file:///c:/Users/
   - Applied `background: transparent; border: none;` reset to `.sticky-mobile-cta button` in `index.html` to eliminate browser user-agent white/grey background defaults.
   - Added dedicated `.sticky-book-btn` styling with vibrant jade green background (`var(--color-jade)` / `#2E9B7C`) and white bold text (`#ffffff`), making "Book Now" stand out as a high-contrast primary CTA on mobile.
 
-### 53. Calendly Integration & Interactive 2-Slide Booking Modal
-- **Request**: I WANT TO EMBED A LINK OF CALENDLY IN EVERY BOOKING APPOINTMENT, AND IF YOU CAN SEE THAT IF YOU CLICK A APPOINTMENT MAKE A 2 SLIDE WHERE THE SECOND PAGE WILL BE THE CALENDLY
-- **Solution**:
-  - **Interactive 2-Slide Booking Modal (`#booking-modal`)**:
-    - **Slide 1 (Intake Details)**: Collects requested service, full name, phone number, and email. Features a quick Calendly banner (`Want to schedule on Calendly directly? Open Calendly ↗`) and a direct link button.
-    - **Slide 2 (Embedded Calendly Scheduler)**: Features a live embedded Calendly iframe (`https://calendly.com/flextendtherapy2024`), a `← Back to Intake Details` button to return to Slide 1, and a `New Tab ↗` launcher button.
-  - **Slide Stepper Header**: Added interactive top step indicators (`1. Intake Details` | `2. Calendly Scheduler`) with active state highlights and smooth sliding transitions (`transform: translateX(...)`).
-  - **Every Booking CTA Integration**:
-    - Header "Book Now", Hero Quick Booking Bar, Body Map CTA ("BOOK NOW FOR EVALUATION!"), Clinician Cards, and Mobile Sticky Bar CTAs now trigger the 2-slide Calendly modal workflow.
-    - Added direct "Open Calendly Scheduler Directly ↗" buttons and link banners to the inline appointment section (`#book-first-appointment`).
-
+### 53. Booking Intake Flow Revision
+- Replaced the external scheduling embed with a single intake submission flow.
+- Booking requests are saved for the clinic team, which contacts the patient to confirm an appointment time.

@@ -18,14 +18,9 @@ import { MobileStickyCTA } from "@/components/mobile-sticky-cta";
 export default function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalService, setModalService] = useState("Physical Therapy Evaluation");
-  const [modalStep, setModalStep] = useState(1);
 
-  const handleOpenBooking = (
-    serviceName: string = "Physical Therapy Evaluation",
-    step: number = 1
-  ) => {
+  const handleOpenBooking = (serviceName: string = "Physical Therapy Evaluation") => {
     setModalService(serviceName);
-    setModalStep(step);
     setIsModalOpen(true);
   };
 
@@ -45,7 +40,7 @@ export default function Home() {
         <Clinicians />
         <Testimonials />
         <FAQ />
-        <BookingSection onOpenBooking={handleOpenBooking} />
+        <BookingSection />
       </main>
       <Footer />
       <MobileStickyCTA onOpenBooking={() => handleOpenBooking("Physical Therapy Evaluation")} />
@@ -53,7 +48,6 @@ export default function Home() {
         isOpen={isModalOpen}
         onClose={handleCloseBooking}
         serviceName={modalService}
-        initialStep={modalStep}
       />
     </div>
   );

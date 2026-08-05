@@ -8,11 +8,7 @@ import { Label } from "@/components/ui/label";
 import { saveAppointment } from "@/lib/store";
 import { Calendar, Phone, Mail, Clock, MapPin, CheckCircle2, ShieldCheck } from "lucide-react";
 
-interface BookingSectionProps {
-  onOpenBooking: (serviceName?: string, step?: number) => void;
-}
-
-export function BookingSection({ onOpenBooking }: BookingSectionProps) {
+export function BookingSection() {
   const [selectedService, setSelectedService] = useState("Physical Therapy Evaluation");
   const [name, setName] = useState("");
   const [phoneNum, setPhoneNum] = useState("");
@@ -34,9 +30,6 @@ export function BookingSection({ onOpenBooking }: BookingSectionProps) {
     });
 
     setSubmittedMessage(true);
-    setTimeout(() => {
-      onOpenBooking(selectedService, 2);
-    }, 600);
   };
 
   return (
@@ -138,7 +131,7 @@ export function BookingSection({ onOpenBooking }: BookingSectionProps) {
                   Book an Evaluation Appointment
                 </CardTitle>
                 <CardDescription className="text-sm text-[#4A5D56]">
-                  Select your treatment focus area below to launch the appointment scheduler.
+                  Submit your contact details and the clinic team will contact you to confirm an appointment time.
                 </CardDescription>
               </CardHeader>
 
@@ -146,7 +139,7 @@ export function BookingSection({ onOpenBooking }: BookingSectionProps) {
                 {submittedMessage && (
                   <div className="mb-4 p-3 rounded-2xl bg-green-50 border border-green-200 text-green-800 text-xs font-bold flex items-center gap-2">
                     <CheckCircle2 className="h-4 w-4 text-green-600 shrink-0" />
-                    Intake recorded! Opening live scheduler...
+                    Intake recorded! The clinic team will contact you to confirm a time.
                   </div>
                 )}
 
@@ -227,7 +220,7 @@ export function BookingSection({ onOpenBooking }: BookingSectionProps) {
                       className="w-full bg-[#064E3B] hover:bg-[#032D22] text-white font-bold text-base h-13 rounded-full shadow-md gap-2"
                     >
                       <Calendar className="h-5 w-5" />
-                      Save Intake & Continue to Calendly →
+                      Submit Intake Request
                     </Button>
                   </div>
 
