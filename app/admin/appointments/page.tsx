@@ -7,8 +7,13 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Appointment, AppointmentStatus } from "@/types/supabase";
-import { getAppointments, updateAppointmentStatus } from "@/lib/store";
-import { CalendarCheck, Search, CheckCircle2, Clock, XCircle, Phone, Mail, Inbox, ExternalLink } from "lucide-react";
+import {
+  canTransitionAppointmentStatus,
+  deleteAppointment,
+  getAppointments,
+  updateAppointmentStatus,
+} from "@/lib/store";
+import { CalendarCheck, Search, CheckCircle2, Clock, XCircle, Phone, Mail, Inbox, ExternalLink, Trash2 } from "lucide-react";
 
 export default function AppointmentsPage() {
   const [filterStatus, setFilterStatus] = useState<string>("all");
@@ -30,6 +35,18 @@ export default function AppointmentsPage() {
   const handleStatusChange = (id: string, newStatus: AppointmentStatus) => {
     const updated = updateAppointmentStatus(id, newStatus);
     setAppointments(updated);
+  };
+
+  const handleDelete = (id: string) => {
+    const appointment = appointments.find((apt) => apt.id === id);
+    if (!appointment || appointment.status !== "cancelled") return;
+
+    const confirmed = window.confirm(
+      `Delete cancelled booking ${appointment.id}? This cannot be undone.`
+    );
+    if (confirmed) {
+      setAppointments(deleteAppointment(id));
+    }
   };
 
   const filteredAppointments = appointments.filter((apt) => {
@@ -171,7 +188,7 @@ export default function AppointmentsPage() {
 
                 {/* Right Action Buttons */}
                 <div className="flex items-center gap-2 self-start lg:self-center shrink-0">
-                  {apt.status !== "confirmed" && (
+                  {canTransitionAppointmentStatus(apt.status, "confirmed") && (
                     <Button
                       size="sm"
                       onClick={() => handleStatusChange(apt.id, "confirmed")}
@@ -181,7 +198,7 @@ export default function AppointmentsPage() {
                       Confirm
                     </Button>
                   )}
-                  {apt.status !== "completed" && (
+                  {canTransitionAppointmentStatus(apt.status, "completed") && (
                     <Button
                       size="sm"
                       onClick={() => handleStatusChange(apt.id, "completed")}
@@ -190,7 +207,7 @@ export default function AppointmentsPage() {
                       Complete
                     </Button>
                   )}
-                  {apt.status !== "cancelled" && (
+                  {canTransitionAppointmentStatus(apt.status, "cancelled") && (
                     <Button
                       size="sm"
                       variant="outline"
@@ -199,6 +216,19 @@ export default function AppointmentsPage() {
                     >
                       <XCircle className="h-3.5 w-3.5" />
                       Cancel
+                    </Button>
+                  )}
+                  {apt.status === "cancelled" && (
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      onClick={() => handleDelete(apt.id)}
+                      title="Delete cancelled booking"
+                      aria-label={`Delete cancelled booking ${apt.id}`}
+                      className="border-red-200 text-red-600 hover:bg-red-600 hover:text-white font-bold text-xs rounded-full gap-1"
+                    >
+                      <Trash2 className="h-3.5 w-3.5" />
+                      Delete booking
                     </Button>
                   )}
                 </div>

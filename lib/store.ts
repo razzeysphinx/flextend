@@ -3,6 +3,13 @@ import { Appointment, AppointmentStatus, Profile, UserRole } from "@/types/supab
 const APPOINTMENTS_KEY = "flextend_live_appointments";
 const USERS_KEY = "flextend_live_users";
 
+const APPOINTMENT_STATUS_TRANSITIONS: Record<AppointmentStatus, AppointmentStatus[]> = {
+  pending: ["confirmed", "cancelled"],
+  confirmed: ["completed", "cancelled"],
+  completed: [],
+  cancelled: [],
+};
+
 // Default Initial Admin User Account
 const INITIAL_USERS: Profile[] = [
   {
@@ -63,9 +70,28 @@ export function saveAppointment(data: {
 export function updateAppointmentStatus(id: string, newStatus: AppointmentStatus): Appointment[] {
   const current = getAppointments();
   const updated = current.map((apt) =>
-    apt.id === id ? { ...apt, status: newStatus } : apt
+    apt.id === id && APPOINTMENT_STATUS_TRANSITIONS[apt.status].includes(newStatus)
+      ? { ...apt, status: newStatus }
+      : apt
   );
   if (typeof window !== "undefined") {
+    localStorage.setItem(APPOINTMENTS_KEY, JSON.stringify(updated));
+    window.dispatchEvent(new Event("flextend_appointments_updated"));
+  }
+  return updated;
+}
+
+export function canTransitionAppointmentStatus(
+  currentStatus: AppointmentStatus,
+  nextStatus: AppointmentStatus
+): boolean {
+  return APPOINTMENT_STATUS_TRANSITIONS[currentStatus].includes(nextStatus);
+}
+
+export function deleteAppointment(id: string): Appointment[] {
+  const current = getAppointments();
+  const updated = current.filter((apt) => apt.id !== id || apt.status !== "cancelled");
+  if (typeof window !== "undefined" && updated.length !== current.length) {
     localStorage.setItem(APPOINTMENTS_KEY, JSON.stringify(updated));
     window.dispatchEvent(new Event("flextend_appointments_updated"));
   }
