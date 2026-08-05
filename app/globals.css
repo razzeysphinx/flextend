@@ -1,0 +1,67 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 36 33% 97%; /* #FAF7F2 */
+    --foreground: 161 47% 7%; /* #0A1C16 */
+
+    --card: 36 43% 97%; /* #FCF8F2 */
+    --card-foreground: 161 47% 7%;
+
+    --popover: 36 43% 97%;
+    --popover-foreground: 161 47% 7%;
+
+    --primary: 163 86% 17%; /* #064E3B - Emerald Ink */
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 41 53% 54%; /* #C9A24B - Antique Gold */
+    --secondary-foreground: 161 86% 10%;
+
+    --muted: 156 11% 33%; /* #4A5D56 */
+    --muted-foreground: 156 10% 45%;
+
+    --accent: 162 54% 39%; /* #2E9B7C - Jade */
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 18 51% 50%; /* #C1663F - Terracotta */
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 163 30% 80%;
+    --input: 163 30% 80%;
+    --ring: 163 86% 17%;
+
+    --radius: 0.75rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-[#FAF7F2] text-[#0A1C16] font-body antialiased selection:bg-[#2E9B7C]/20 selection:text-[#064E3B];
+  }
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading tracking-tight;
+  }
+}
+
+/* Custom Utilities for FlexTend Design Tokens */
+.glass-nav {
+  background: rgba(250, 247, 242, 0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.dark-banner {
+  background: linear-gradient(135deg, #032D22 0%, #064E3B 100%);
+}
+
+.shadow-glow {
+  box-shadow: 0 0 25px rgba(46, 155, 124, 0.25);
+}
