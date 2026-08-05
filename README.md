@@ -28,3 +28,19 @@ flextend/
 ## Getting Started
 
 Open `FLEXTEND REVISED 2.html` in any modern web browser to view the site locally.
+
+## Mock Admin Account (Development Only)
+
+Use this test account only with the connected Supabase development project:
+
+- **Email:** `mock.admin@flextend.clinic`
+- **Temporary password:** `FlextendMock!47Violet-2026`
+- **Required profile role:** `admin`
+
+Create the user in Supabase Dashboard under **Authentication → Users**, enable
+**Auto Confirm User**, then set the matching profile role to `admin` in
+`public.profiles`. If signup is rate-limited, create the user from the
+Dashboard instead. The current development project has this account
+provisioned with the `admin` role.
+
+Do not use this account in production or reuse its password for any real user.

@@ -39,7 +39,11 @@ function LoginContent() {
       });
 
       if (error) {
-        setErrorMessage(error.message);
+        setErrorMessage(
+          error.message.toLowerCase().includes("invalid api key")
+            ? "Supabase rejected the API key. Update NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY in .env.local, then restart the dev server."
+            : error.message
+        );
         return;
       }
 
