@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState, Suspense } from "react";
+import React, { useState, Suspense } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -19,13 +19,7 @@ function LoginContent() {
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-  const [unauthorizedBanner, setUnauthorizedBanner] = useState(false);
-
-  useEffect(() => {
-    if (searchParams.get("unauthorized") === "true") {
-      setUnauthorizedBanner(true);
-    }
-  }, [searchParams]);
+  const unauthorizedBanner = searchParams.get("unauthorized") === "true";
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();

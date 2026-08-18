@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -26,16 +26,21 @@ export function BookingModal({
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
-  useEffect(() => {
-    if (isOpen) {
-      setFullName("");
-      setPhone("");
-      setEmail("");
-      setSavedSuccess(false);
-      setIsSubmitting(false);
-      setErrorMessage("");
+  const resetForm = () => {
+    setFullName("");
+    setPhone("");
+    setEmail("");
+    setSavedSuccess(false);
+    setIsSubmitting(false);
+    setErrorMessage("");
+  };
+
+  const handleDialogOpenChange = (open: boolean) => {
+    if (!open) {
+      resetForm();
+      onClose();
     }
-  }, [isOpen]);
+  };
 
   const handleSubmitIntake = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -68,7 +73,7 @@ export function BookingModal({
   };
 
   return (
-    <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
+    <Dialog open={isOpen} onOpenChange={handleDialogOpenChange}>
       <DialogContent className="max-w-2xl bg-[#FAF7F2] p-6 sm:p-8 rounded-3xl border border-[#064E3B]/20">
         <DialogHeader>
           <DialogTitle className="text-2xl font-extrabold text-[#032D22]">
