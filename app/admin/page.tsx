@@ -6,7 +6,7 @@ import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/com
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Appointment, Profile } from "@/types/supabase";
-import { listAppointments, listGalleryPhotos, listProfiles } from "@/lib/supabase/data";
+import { getCurrentProfile, listAppointments, listGalleryPhotos, listProfiles } from "@/lib/supabase/data";
 import {
   CalendarCheck,
   Users,
@@ -21,18 +21,21 @@ export default function AdminDashboardPage() {
   const [appointments, setAppointments] = useState<Appointment[]>([]);
   const [users, setUsers] = useState<Profile[]>([]);
   const [photoCount, setPhotoCount] = useState<number | null>(null);
+  const [currentRole, setCurrentRole] = useState<Profile["role"] | null>(null);
   const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
     let isMounted = true;
     const loadData = async () => {
       try {
-        const [nextAppointments, nextUsers, nextPhotos] = await Promise.all([
+        const [currentProfile, nextAppointments, nextUsers, nextPhotos] = await Promise.all([
+          getCurrentProfile(),
           listAppointments(),
           listProfiles(),
           listGalleryPhotos(),
         ]);
         if (isMounted) {
+          setCurrentRole(currentProfile?.role ?? null);
           setAppointments(nextAppointments);
           setUsers(nextUsers);
           setPhotoCount(nextPhotos.length);
@@ -56,6 +59,7 @@ export default function AdminDashboardPage() {
   const totalIntakes = appointments.length;
   const confirmedCount = appointments.filter((a) => a.status === "confirmed").length;
   const pendingCount = appointments.filter((a) => a.status === "pending").length;
+  const isAdmin = currentRole === "admin";
 
   const stats = [
     {
@@ -236,24 +240,26 @@ export default function AdminDashboardPage() {
             </Button>
           </Card>
 
-          <Card className="bg-[#FCF8F2] border border-[#064E3B]/10 p-6 space-y-3">
-            <span className="text-xs font-bold uppercase tracking-wider text-[#064E3B]">
-              RBAC Role Control
-            </span>
-            <p className="text-xs text-[#4A5D56]">
-              Assign user privileges (`Admin`, `Clinician`, `Patient`) to enforce system access security.
-            </p>
-            <Button
-              asChild
-              variant="outline"
-              className="w-full border-[#064E3B]/20 text-[#064E3B] font-bold text-xs py-2.5 rounded-full"
-            >
-              <Link href="/admin/patients">
-                <Users className="h-4 w-4 mr-1.5" />
-                View User RBAC Directory
-              </Link>
-            </Button>
-          </Card>
+          {isAdmin && (
+            <Card className="bg-[#FCF8F2] border border-[#064E3B]/10 p-6 space-y-3">
+              <span className="text-xs font-bold uppercase tracking-wider text-[#064E3B]">
+                RBAC Role Control
+              </span>
+              <p className="text-xs text-[#4A5D56]">
+                Assign user privileges (`Admin`, `Clinician`, `Patient`) to enforce system access security.
+              </p>
+              <Button
+                asChild
+                variant="outline"
+                className="w-full border-[#064E3B]/20 text-[#064E3B] font-bold text-xs py-2.5 rounded-full"
+              >
+                <Link href="/admin/patients">
+                  <Users className="h-4 w-4 mr-1.5" />
+                  View User RBAC Directory
+                </Link>
+              </Button>
+            </Card>
+          )}
         </div>
       </div>
     </div>
