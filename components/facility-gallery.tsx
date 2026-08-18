@@ -137,6 +137,7 @@ export function FacilityGallery() {
                   variant="ghost"
                   size="icon"
                   onClick={handlePrev}
+                  aria-label="Show previous facility photo"
                   className="absolute left-4 top-1/2 -translate-y-1/2 h-12 w-12 rounded-full bg-black/40 text-white hover:bg-[#064E3B] backdrop-blur-md border border-white/20 transition-all"
                 >
                   <ChevronLeft className="h-6 w-6" />
@@ -145,6 +146,7 @@ export function FacilityGallery() {
                   variant="ghost"
                   size="icon"
                   onClick={handleNext}
+                  aria-label="Show next facility photo"
                   className="absolute right-4 top-1/2 -translate-y-1/2 h-12 w-12 rounded-full bg-black/40 text-white hover:bg-[#064E3B] backdrop-blur-md border border-white/20 transition-all"
                 >
                   <ChevronRight className="h-6 w-6" />
@@ -171,6 +173,9 @@ export function FacilityGallery() {
                     <button
                       key={idx}
                       onClick={() => setCurrentSlide(idx)}
+                      type="button"
+                      aria-label={`Show facility photo ${idx + 1}`}
+                      aria-current={idx === currentSlide ? "true" : undefined}
                       className={`h-2.5 rounded-full transition-all duration-300 ${
                         idx === currentSlide
                           ? "w-8 bg-[#C9A24B]"

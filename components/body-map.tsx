@@ -207,6 +207,9 @@ export function BodyMap({ onOpenBooking }: BodyMapProps) {
                     <button
                       key={reg.id}
                       onClick={() => setActiveRegion(reg)}
+                      type="button"
+                      aria-label={`Explore ${reg.title}`}
+                      aria-pressed={isActive}
                       style={{ top: reg.coords.top, left: reg.coords.left }}
                       className={`absolute -translate-x-1/2 -translate-y-1/2 transition-all duration-300 ${isActive ? "scale-125 z-30" : "hover:scale-110 z-20"
                         }`}
