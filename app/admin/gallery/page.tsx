@@ -1,76 +1,99 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Input } from "@/components/ui/input";
-import { Image as ImageIcon, UploadCloud, Trash2, Copy, Check, ExternalLink, HardDrive } from "lucide-react";
+import { Image as ImageIcon, UploadCloud, Trash2, Copy, Check, HardDrive } from "lucide-react";
+import { ClinicPhoto } from "@/types/supabase";
+import {
+  deleteGalleryPhoto,
+  listGalleryPhotos,
+  uploadGalleryPhoto,
+} from "@/lib/supabase/data";
 
 export default function StorageGalleryPage() {
   const [copiedId, setCopiedId] = useState<string | null>(null);
   const [selectedCategory, setSelectedCategory] = useState("all");
+  const [selectedUploadCategory, setSelectedUploadCategory] = useState<"treatment" | "equipment" | "amenities">("treatment");
+  const [photos, setPhotos] = useState<ClinicPhoto[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isUploading, setIsUploading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
-  const [photos, setPhotos] = useState([
-    {
-      id: "IMG-001",
-      name: "Manual Therapy Plinth Suite",
-      category: "treatment",
-      url: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=800&q=80",
-      size: "1.4 MB",
-      uploaded_at: "2026-08-01",
-    },
-    {
-      id: "IMG-002",
-      name: "Electrotherapy Pain Station",
-      category: "equipment",
-      url: "https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&w=800&q=80",
-      size: "2.1 MB",
-      uploaded_at: "2026-08-02",
-    },
-    {
-      id: "IMG-003",
-      name: "Air-Conditioned Reception Lounge",
-      category: "amenities",
-      url: "https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=800&q=80",
-      size: "1.8 MB",
-      uploaded_at: "2026-08-03",
-    },
-    {
-      id: "IMG-004",
-      name: "Pediatric Motor Activity Zone",
-      category: "treatment",
-      url: "https://images.unsplash.com/photo-1502086223501-7ea6ecd79368?auto=format&fit=crop&w=800&q=80",
-      size: "1.9 MB",
-      uploaded_at: "2026-08-04",
-    },
-  ]);
+  useEffect(() => {
+    let isMounted = true;
+    const loadPhotos = async () => {
+      try {
+        const nextPhotos = await listGalleryPhotos();
+        if (isMounted) {
+          setPhotos(nextPhotos);
+          setErrorMessage("");
+        }
+      } catch (error) {
+        if (isMounted) {
+          setErrorMessage(error instanceof Error ? error.message : "Unable to load clinic photos.");
+        }
+      } finally {
+        if (isMounted) setIsLoading(false);
+      }
+    };
 
-  const handleCopyUrl = (id: string, url: string) => {
-    navigator.clipboard.writeText(url);
-    setCopiedId(id);
-    setTimeout(() => setCopiedId(null), 2000);
+    void loadPhotos();
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
+  const handleCopyUrl = async (id: string, url: string) => {
+    try {
+      await navigator.clipboard.writeText(url);
+      setCopiedId(id);
+      window.setTimeout(() => setCopiedId(null), 2000);
+    } catch {
+      setErrorMessage("The image URL could not be copied. Please copy it manually.");
+    }
   };
 
-  const handleDelete = (id: string) => {
-    setPhotos((prev) => prev.filter((p) => p.id !== id));
+  const handleDelete = async (photo: ClinicPhoto) => {
+    if (!window.confirm(`Delete ${photo.name}? This cannot be undone.`)) return;
+
+    try {
+      await deleteGalleryPhoto(photo.id);
+      setPhotos((prev) => prev.filter((currentPhoto) => currentPhoto.id !== photo.id));
+      setErrorMessage("");
+    } catch (error) {
+      setErrorMessage(error instanceof Error ? error.message : "Unable to delete the clinic photo.");
+    }
   };
 
-  const handleSimulatedUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
     if (!files || files.length === 0) return;
 
     const file = files[0];
-    const newAsset = {
-      id: `IMG-${Date.now().toString().slice(-4)}`,
-      name: file.name.replace(/\.[^/.]+$/, ""),
-      category: "treatment",
-      url: URL.createObjectURL(file),
-      size: `${(file.size / (1024 * 1024)).toFixed(1)} MB`,
-      uploaded_at: "Just now",
-    };
+    e.target.value = "";
 
-    setPhotos([newAsset, ...photos]);
+    if (!["image/jpeg", "image/png", "image/webp"].includes(file.type)) {
+      setErrorMessage("Only JPEG, PNG, and WEBP images are supported.");
+      return;
+    }
+
+    if (file.size > 10 * 1024 * 1024) {
+      setErrorMessage("Images must be 10 MB or smaller.");
+      return;
+    }
+
+    setIsUploading(true);
+    setErrorMessage("");
+    try {
+      const newPhoto = await uploadGalleryPhoto(file, selectedUploadCategory);
+      setPhotos((currentPhotos) => [newPhoto, ...currentPhotos]);
+    } catch (error) {
+      setErrorMessage(error instanceof Error ? error.message : "Unable to upload the clinic photo.");
+    } finally {
+      setIsUploading(false);
+    }
   };
 
   const filteredPhotos =
@@ -80,6 +103,12 @@ export default function StorageGalleryPage() {
 
   return (
     <div className="space-y-8">
+      {errorMessage && (
+        <div role="alert" className="rounded-2xl border border-red-200 bg-red-50 p-4 text-xs font-semibold text-red-700">
+          {errorMessage}
+        </div>
+      )}
+
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 bg-[#FCF8F2] p-6 rounded-3xl border border-[#064E3B]/15 shadow-sm">
         <div>
@@ -107,23 +136,34 @@ export default function StorageGalleryPage() {
             <h3 className="font-bold text-base text-[#032D22]">
               Upload New Clinic Photo to Supabase Storage
             </h3>
-            <p className="text-xs text-[#4A5D56] mt-1">
+          <p className="text-xs text-[#4A5D56] mt-1">
               Supports PNG, JPG, WEBP up to 10MB per file.
             </p>
           </div>
+          <select
+            value={selectedUploadCategory}
+            onChange={(e) => setSelectedUploadCategory(e.target.value as typeof selectedUploadCategory)}
+            className="h-10 rounded-full border border-[#064E3B]/20 bg-white px-4 text-xs font-bold text-[#032D22] focus:outline-none focus:ring-2 focus:ring-[#064E3B]"
+            aria-label="Clinic photo category"
+          >
+            <option value="treatment">Treatment</option>
+            <option value="equipment">Equipment</option>
+            <option value="amenities">Amenities</option>
+          </select>
           <label className="cursor-pointer">
             <input
               type="file"
               accept="image/*"
               className="hidden"
-              onChange={handleSimulatedUpload}
+              onChange={handleUpload}
+              disabled={isUploading}
             />
             <Button
               type="button"
               asChild
               className="bg-[#064E3B] hover:bg-[#032D22] text-white font-bold text-xs rounded-full px-6 py-2.5 shadow-sm pointer-events-none"
             >
-              <span>Select File from Computer</span>
+              <span>{isUploading ? "Uploading..." : "Select File from Computer"}</span>
             </Button>
           </label>
         </div>
@@ -150,6 +190,13 @@ export default function StorageGalleryPage() {
 
       {/* Storage Asset Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {!isLoading && filteredPhotos.length === 0 && (
+          <Card className="sm:col-span-2 lg:col-span-4 bg-[#FCF8F2] border border-[#064E3B]/10 p-10 text-center">
+            <ImageIcon className="mx-auto h-8 w-8 text-[#8A9D96]" />
+            <p className="mt-3 text-sm font-bold text-[#032D22]">No clinic photos found</p>
+            <p className="mt-1 text-xs text-[#4A5D56]">Upload the first image for this category.</p>
+          </Card>
+        )}
         {filteredPhotos.map((photo) => (
           <Card key={photo.id} className="bg-[#FCF8F2] border border-[#064E3B]/15 overflow-hidden group">
             <div className="relative h-44 w-full overflow-hidden bg-black/5">
@@ -167,8 +214,8 @@ export default function StorageGalleryPage() {
               <div>
                 <h4 className="font-bold text-xs text-[#032D22] truncate">{photo.name}</h4>
                 <div className="flex items-center justify-between text-[10px] text-[#4A5D56] mt-1">
-                  <span>Size: {photo.size}</span>
-                  <span>{photo.uploaded_at}</span>
+                  <span>Size: {photo.size_bytes ? `${(photo.size_bytes / (1024 * 1024)).toFixed(1)} MB` : "Unknown"}</span>
+                  <span>{new Date(photo.created_at).toLocaleDateString()}</span>
                 </div>
               </div>
 
@@ -195,7 +242,9 @@ export default function StorageGalleryPage() {
                 <Button
                   size="icon"
                   variant="ghost"
-                  onClick={() => handleDelete(photo.id)}
+                  onClick={() => void handleDelete(photo)}
+                  aria-label={`Delete ${photo.name}`}
+                  title={`Delete ${photo.name}`}
                   className="h-8 w-8 text-red-600 hover:bg-red-50 rounded-full"
                 >
                   <Trash2 className="h-4 w-4" />

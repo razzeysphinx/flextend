@@ -5,28 +5,46 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Profile, UserRole } from "@/types/supabase";
-import { getUsers, updateUserRole } from "@/lib/store";
+import { listProfiles, updateProfileRole } from "@/lib/supabase/data";
 import { Search, ShieldCheck, UserCheck, Lock } from "lucide-react";
 
 export default function PatientsRBACPage() {
   const [searchQuery, setSearchQuery] = useState("");
   const [users, setUsers] = useState<Profile[]>([]);
-
-  const loadUsers = () => {
-    setUsers(getUsers());
-  };
+  const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
-    loadUsers();
-    window.addEventListener("flextend_users_updated", loadUsers);
+    let isMounted = true;
+    const loadUsers = async () => {
+      try {
+        const nextUsers = await listProfiles();
+        if (isMounted) {
+          setUsers(nextUsers);
+          setErrorMessage("");
+        }
+      } catch (error) {
+        if (isMounted) {
+          setErrorMessage(error instanceof Error ? error.message : "Unable to load user profiles.");
+        }
+      }
+    };
+
+    void loadUsers();
+    const refreshTimer = window.setInterval(loadUsers, 30000);
     return () => {
-      window.removeEventListener("flextend_users_updated", loadUsers);
+      isMounted = false;
+      window.clearInterval(refreshTimer);
     };
   }, []);
 
-  const handleRoleChange = (userId: string, newRole: UserRole) => {
-    const updated = updateUserRole(userId, newRole);
-    setUsers(updated);
+  const handleRoleChange = async (userId: string, newRole: UserRole) => {
+    try {
+      const updated = await updateProfileRole(userId, newRole);
+      setUsers((current) => current.map((user) => user.id === userId ? updated : user));
+      setErrorMessage("");
+    } catch (error) {
+      setErrorMessage(error instanceof Error ? error.message : "Unable to update the user role.");
+    }
   };
 
   const filteredUsers = users.filter(
@@ -38,6 +56,12 @@ export default function PatientsRBACPage() {
 
   return (
     <div className="space-y-8">
+      {errorMessage && (
+        <div role="alert" className="rounded-2xl border border-red-200 bg-red-50 p-4 text-xs font-semibold text-red-700">
+          {errorMessage}
+        </div>
+      )}
+
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 bg-[#FCF8F2] p-6 rounded-3xl border border-[#064E3B]/15 shadow-sm">
         <div>

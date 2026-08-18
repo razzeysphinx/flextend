@@ -6,7 +6,7 @@ import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/com
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Appointment, Profile } from "@/types/supabase";
-import { getAppointments, getUsers } from "@/lib/store";
+import { listAppointments, listGalleryPhotos, listProfiles } from "@/lib/supabase/data";
 import {
   CalendarCheck,
   Users,
@@ -20,19 +20,36 @@ import {
 export default function AdminDashboardPage() {
   const [appointments, setAppointments] = useState<Appointment[]>([]);
   const [users, setUsers] = useState<Profile[]>([]);
-
-  const loadData = () => {
-    setAppointments(getAppointments());
-    setUsers(getUsers());
-  };
+  const [photoCount, setPhotoCount] = useState<number | null>(null);
+  const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
-    loadData();
-    window.addEventListener("flextend_appointments_updated", loadData);
-    window.addEventListener("flextend_users_updated", loadData);
+    let isMounted = true;
+    const loadData = async () => {
+      try {
+        const [nextAppointments, nextUsers, nextPhotos] = await Promise.all([
+          listAppointments(),
+          listProfiles(),
+          listGalleryPhotos(),
+        ]);
+        if (isMounted) {
+          setAppointments(nextAppointments);
+          setUsers(nextUsers);
+          setPhotoCount(nextPhotos.length);
+          setErrorMessage("");
+        }
+      } catch (error) {
+        if (isMounted) {
+          setErrorMessage(error instanceof Error ? error.message : "Unable to load dashboard data.");
+        }
+      }
+    };
+
+    void loadData();
+    const refreshTimer = window.setInterval(loadData, 30000);
     return () => {
-      window.removeEventListener("flextend_appointments_updated", loadData);
-      window.removeEventListener("flextend_users_updated", loadData);
+      isMounted = false;
+      window.clearInterval(refreshTimer);
     };
   }, []);
 
@@ -67,8 +84,8 @@ export default function AdminDashboardPage() {
     },
     {
       title: "Supabase Storage Assets",
-      value: "4 Photos",
-      change: "Clinic Media Bucket",
+      value: photoCount === null ? "—" : `${photoCount}`,
+      change: "Live clinic media assets",
       icon: ImageIcon,
       color: "text-[#C1663F]",
       bg: "bg-[#C1663F]/15",
@@ -77,6 +94,12 @@ export default function AdminDashboardPage() {
 
   return (
     <div className="space-y-8">
+      {errorMessage && (
+        <div role="alert" className="rounded-2xl border border-red-200 bg-red-50 p-4 text-xs font-semibold text-red-700">
+          {errorMessage}
+        </div>
+      )}
+
       {/* Top Banner */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 bg-[#FCF8F2] p-6 rounded-3xl border border-[#064E3B]/15 shadow-sm">
         <div>

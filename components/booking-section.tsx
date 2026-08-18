@@ -5,7 +5,7 @@ import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/com
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { saveAppointment } from "@/lib/store";
+import { createAppointment } from "@/lib/supabase/data";
 import { Calendar, Phone, Mail, Clock, MapPin, CheckCircle2, ShieldCheck } from "lucide-react";
 
 export function BookingSection() {
@@ -15,21 +15,35 @@ export function BookingSection() {
   const [email, setEmail] = useState("");
   const [symptoms, setSymptoms] = useState("");
   const [submittedMessage, setSubmittedMessage] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!name || !phoneNum || !email) return;
 
-    // Save live appointment entry to store so admin panel picks it up
-    saveAppointment({
-      patient_name: name,
-      patient_phone: phoneNum,
-      patient_email: email,
-      service_title: selectedService,
-      notes: symptoms || `Inline Form Request for ${selectedService}`,
-    });
+    setIsSubmitting(true);
+    setErrorMessage("");
 
-    setSubmittedMessage(true);
+    try {
+      await createAppointment({
+        patient_name: name,
+        patient_phone: phoneNum,
+        patient_email: email,
+        service_title: selectedService,
+        notes: symptoms || `Inline Form Request for ${selectedService}`,
+      });
+
+      setSubmittedMessage(true);
+      setName("");
+      setPhoneNum("");
+      setEmail("");
+      setSymptoms("");
+    } catch (error) {
+      setErrorMessage(error instanceof Error ? error.message : "Unable to submit the intake request.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -143,6 +157,12 @@ export function BookingSection() {
                   </div>
                 )}
 
+                {errorMessage && (
+                  <div role="alert" className="mb-4 rounded-2xl border border-red-200 bg-red-50 p-3 text-xs font-semibold text-red-700">
+                    {errorMessage}
+                  </div>
+                )}
+
                 <form onSubmit={handleSubmit} className="space-y-5">
                   <div className="space-y-2">
                     <Label htmlFor="inline-service">Preferred Specialty / Treatment Area</Label>
@@ -217,10 +237,11 @@ export function BookingSection() {
                   <div className="pt-2 flex flex-col gap-3">
                     <Button
                       type="submit"
-                      className="w-full bg-[#064E3B] hover:bg-[#032D22] text-white font-bold text-base h-13 rounded-full shadow-md gap-2"
+                      disabled={isSubmitting}
+                      className="w-full bg-[#064E3B] hover:bg-[#032D22] text-white font-bold text-base h-[52px] rounded-full shadow-md gap-2"
                     >
                       <Calendar className="h-5 w-5" />
-                      Submit Intake Request
+                      {isSubmitting ? "Submitting..." : "Submit Intake Request"}
                     </Button>
                   </div>
 

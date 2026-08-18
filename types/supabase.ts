@@ -21,6 +21,7 @@ export interface Appointment {
   notes?: string;
   status: AppointmentStatus;
   created_at: string;
+  updated_at?: string;
 }
 
 export interface ClinicPhoto {
@@ -30,4 +31,14 @@ export interface ClinicPhoto {
   category: "treatment" | "equipment" | "amenities";
   created_at: string;
   size_bytes?: number;
+}
+
+export interface ClinicSettings {
+  id: "default";
+  business_name: string;
+  phone: string;
+  email: string;
+  address: string;
+  operating_hours: string;
+  updated_at: string;
 }

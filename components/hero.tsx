@@ -43,7 +43,7 @@ export function Hero({ onOpenBooking }: HeroProps) {
               <Button
                 size="lg"
                 onClick={() => onOpenBooking("Physical Therapy Evaluation")}
-                className="w-full sm:w-auto bg-[#064E3B] hover:bg-[#032D22] text-white shadow-md hover:shadow-lg font-bold gap-2 text-base h-13"
+                className="w-full sm:w-auto bg-[#064E3B] hover:bg-[#032D22] text-white shadow-md hover:shadow-lg font-bold gap-2 text-base h-[52px]"
               >
                 <Calendar className="h-5 w-5" />
                 Schedule Evaluation
@@ -52,7 +52,7 @@ export function Hero({ onOpenBooking }: HeroProps) {
                 variant="outline"
                 size="lg"
                 asChild
-                className="w-full sm:w-auto border-[#064E3B]/30 text-[#064E3B] font-semibold gap-2 text-base h-13"
+                className="w-full sm:w-auto border-[#064E3B]/30 text-[#064E3B] font-semibold gap-2 text-base h-[52px]"
               >
                 <a href="#services">
                   Explore Services

@@ -5,7 +5,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } f
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { saveAppointment } from "@/lib/store";
+import { createAppointment } from "@/lib/supabase/data";
 import { Calendar, CheckCircle2, ShieldCheck } from "lucide-react";
 
 interface BookingModalProps {
@@ -23,6 +23,8 @@ export function BookingModal({
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [savedSuccess, setSavedSuccess] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
     if (isOpen) {
@@ -30,22 +32,32 @@ export function BookingModal({
       setPhone("");
       setEmail("");
       setSavedSuccess(false);
+      setIsSubmitting(false);
+      setErrorMessage("");
     }
   }, [isOpen]);
 
-  const handleSubmitIntake = (e: React.FormEvent) => {
+  const handleSubmitIntake = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!fullName || !phone || !email) return;
 
-    saveAppointment({
-      patient_name: fullName,
-      patient_phone: phone,
-      patient_email: email,
-      service_title: serviceName,
-      notes: `Requested via Landing Page Modal for ${serviceName}`,
-    });
+    setIsSubmitting(true);
+    setErrorMessage("");
 
-    setSavedSuccess(true);
+    try {
+      await createAppointment({
+        patient_name: fullName,
+        patient_phone: phone,
+        patient_email: email,
+        service_title: serviceName,
+        notes: `Requested via Landing Page Modal for ${serviceName}`,
+      });
+      setSavedSuccess(true);
+    } catch (error) {
+      setErrorMessage(error instanceof Error ? error.message : "Unable to submit the intake request.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -76,6 +88,12 @@ export function BookingModal({
           </div>
         ) : (
           <form onSubmit={handleSubmitIntake} className="space-y-4 mt-2">
+            {errorMessage && (
+              <div role="alert" className="rounded-xl border border-red-200 bg-red-50 p-3 text-xs font-semibold text-red-700">
+                {errorMessage}
+              </div>
+            )}
+
             <div className="space-y-1.5">
               <Label htmlFor="modal-service">Requested Service Focus</Label>
               <Input
@@ -129,10 +147,11 @@ export function BookingModal({
 
             <Button
               type="submit"
+              disabled={isSubmitting}
               className="w-full bg-[#064E3B] hover:bg-[#032D22] text-white font-bold text-sm h-11 rounded-full gap-2"
             >
               <Calendar className="h-4 w-4" />
-              Submit Intake Request
+              {isSubmitting ? "Submitting..." : "Submit Intake Request"}
             </Button>
 
             <div className="flex items-center justify-center gap-1.5 text-[11px] text-[#8A9D96] pt-1">

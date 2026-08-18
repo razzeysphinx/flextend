@@ -1,46 +1,43 @@
 # FlexTend Physical Therapy Clinic
 
-A website for **FlexTend Physical Therapy Clinic** located in Lipa City, Batangas, Philippines.
+Next.js website and Supabase-backed clinic administration portal for FlexTend Physical Therapy Clinic in Lipa City, Batangas.
 
-## About
+## Getting started
 
-FlexTend is an evidence-based physical and occupational therapy clinic staffed by licensed clinicians. This site provides information about services, booking, and contact details.
+1. Install dependencies:
 
-## Contact
+   ```bash
+   npm install
+   ```
 
-- **Phone:** +63-967-195-6863
-- **Email:** flextendtherapy2024@gmail.com
-- **Address:** 299 San Jose Subdivision, Balagbag, Brgy. San Sebastian, Lipa City, Batangas 4217
+2. Copy `.env.example` to `.env.local` and add the Supabase project URL and publishable key.
 
-## Hours
+3. Start the development server:
 
-Monday – Saturday: 8:00 AM – 4:00 PM
+   ```bash
+   npm run dev
+   ```
 
-## Project Structure
+Open `http://localhost:3000`.
 
+## Available checks
+
+```bash
+npm run lint
+npx tsc --noEmit
+npm run build
 ```
-flextend/
-├── FLEXTEND REVISED 2.html   # Main website file
-├── .gitignore
-└── README.md
-```
 
-## Getting Started
+## Supabase
 
-Open `FLEXTEND REVISED 2.html` in any modern web browser to view the site locally.
+Database migrations live in `supabase/migrations`. The application uses the publishable Supabase key in browser clients, with authentication and RLS enforcing access to appointments, profiles, and clinic gallery storage.
 
-## Mock Admin Account (Development Only)
+Never commit Supabase secret keys, passwords, or production credentials. Use a separate development account and rotate credentials if they are exposed.
 
-Use this test account only with the connected Supabase development project:
+## Project structure
 
-- **Email:** `mock.admin@flextend.clinic`
-- **Temporary password:** `FlextendMock!47Violet-2026`
-- **Required profile role:** `admin`
-
-Create the user in Supabase Dashboard under **Authentication → Users**, enable
-**Auto Confirm User**, then set the matching profile role to `admin` in
-`public.profiles`. If signup is rate-limited, create the user from the
-Dashboard instead. The current development project has this account
-provisioned with the `admin` role.
-
-Do not use this account in production or reuse its password for any real user.
+- `app/` — Next.js routes, authentication, and admin pages
+- `components/` — public website and shared UI components
+- `lib/supabase/` — browser/server clients and data access
+- `supabase/migrations/` — database schema and RLS migrations
+- `types/` — shared application types

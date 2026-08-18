@@ -7,37 +7,57 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Appointment, AppointmentStatus } from "@/types/supabase";
+import { canTransitionAppointmentStatus } from "@/lib/appointment-status";
 import {
-  canTransitionAppointmentStatus,
   deleteAppointment,
-  getAppointments,
+  listAppointments,
   updateAppointmentStatus,
-} from "@/lib/store";
+} from "@/lib/supabase/data";
 import { CalendarCheck, Search, CheckCircle2, Clock, XCircle, Phone, Mail, Inbox, ExternalLink, Trash2 } from "lucide-react";
 
 export default function AppointmentsPage() {
   const [filterStatus, setFilterStatus] = useState<string>("all");
   const [searchQuery, setSearchQuery] = useState("");
   const [appointments, setAppointments] = useState<Appointment[]>([]);
-
-  const loadData = () => {
-    setAppointments(getAppointments());
-  };
+  const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
-    loadData();
-    window.addEventListener("flextend_appointments_updated", loadData);
+    let isMounted = true;
+    const loadData = async () => {
+      try {
+        const nextAppointments = await listAppointments();
+        if (isMounted) {
+          setAppointments(nextAppointments);
+          setErrorMessage("");
+        }
+      } catch (error) {
+        if (isMounted) {
+          setErrorMessage(error instanceof Error ? error.message : "Unable to load appointments.");
+        }
+      }
+    };
+
+    void loadData();
+    const refreshTimer = window.setInterval(loadData, 30000);
     return () => {
-      window.removeEventListener("flextend_appointments_updated", loadData);
+      isMounted = false;
+      window.clearInterval(refreshTimer);
     };
   }, []);
 
-  const handleStatusChange = (id: string, newStatus: AppointmentStatus) => {
-    const updated = updateAppointmentStatus(id, newStatus);
-    setAppointments(updated);
+  const handleStatusChange = async (id: string, newStatus: AppointmentStatus) => {
+    try {
+      const updated = await updateAppointmentStatus(id, newStatus);
+      setAppointments((current) => current.map((appointment) => (
+        appointment.id === id ? updated : appointment
+      )));
+      setErrorMessage("");
+    } catch (error) {
+      setErrorMessage(error instanceof Error ? error.message : "Unable to update the appointment.");
+    }
   };
 
-  const handleDelete = (id: string) => {
+  const handleDelete = async (id: string) => {
     const appointment = appointments.find((apt) => apt.id === id);
     if (!appointment || appointment.status !== "cancelled") return;
 
@@ -45,7 +65,13 @@ export default function AppointmentsPage() {
       `Delete cancelled booking ${appointment.id}? This cannot be undone.`
     );
     if (confirmed) {
-      setAppointments(deleteAppointment(id));
+      try {
+        await deleteAppointment(id);
+        setAppointments((current) => current.filter((currentAppointment) => currentAppointment.id !== id));
+        setErrorMessage("");
+      } catch (error) {
+        setErrorMessage(error instanceof Error ? error.message : "Unable to delete the appointment.");
+      }
     }
   };
 
@@ -60,6 +86,12 @@ export default function AppointmentsPage() {
 
   return (
     <div className="space-y-8">
+      {errorMessage && (
+        <div role="alert" className="rounded-2xl border border-red-200 bg-red-50 p-4 text-xs font-semibold text-red-700">
+          {errorMessage}
+        </div>
+      )}
+
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 bg-[#FCF8F2] p-6 rounded-3xl border border-[#064E3B]/15 shadow-sm">
         <div>
