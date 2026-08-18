@@ -28,7 +28,7 @@ export function AdminHeader({
     <header className="sticky top-0 z-30 bg-[#FAF7F2] border-b border-[#064E3B]/10 px-6 py-4 flex items-center justify-between">
       <div className="flex items-center gap-3">
         <h2 className="font-heading text-lg font-bold text-[#032D22]">
-          Admin Control Center
+          {role === "admin" ? "Admin Control Center" : "Clinician Workspace"}
         </h2>
         <Badge
           variant={role === "admin" ? "gold" : role === "clinician" ? "jade" : "secondary"}

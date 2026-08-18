@@ -87,7 +87,7 @@ export default async function AdminLayout({
 
   return (
     <div className="flex min-h-screen bg-[#FAF7F2]">
-      <AdminSidebar />
+      <AdminSidebar role={role!} />
       <div className="flex-1 flex flex-col min-w-0">
         <AdminHeader
           email={profile?.email ?? user.email ?? "Unknown user"}

@@ -15,8 +15,9 @@ import {
   ExternalLink,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import { UserRole } from "@/types/supabase";
 
-export function AdminSidebar() {
+export function AdminSidebar({ role }: { role: UserRole }) {
   const pathname = usePathname();
 
   const navItems = [
@@ -31,20 +32,24 @@ export function AdminSidebar() {
       icon: CalendarCheck,
     },
     {
-      name: "Patients & RBAC Roles",
-      href: "/admin/patients",
-      icon: Users,
-    },
-    {
       name: "Supabase Storage Gallery",
       href: "/admin/gallery",
       icon: ImageIcon,
     },
-    {
-      name: "Settings & Setup",
-      href: "/admin/settings",
-      icon: Settings,
-    },
+    ...(role === "admin"
+      ? [
+          {
+            name: "Patients & RBAC Roles",
+            href: "/admin/patients",
+            icon: Users,
+          },
+          {
+            name: "Settings & Setup",
+            href: "/admin/settings",
+            icon: Settings,
+          },
+        ]
+      : []),
   ];
 
   return (

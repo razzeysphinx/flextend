@@ -5,20 +5,25 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Profile, UserRole } from "@/types/supabase";
-import { listProfiles, updateProfileRole } from "@/lib/supabase/data";
+import { getCurrentProfile, listProfiles, updateProfileRole } from "@/lib/supabase/data";
 import { Search, ShieldCheck, UserCheck, Lock } from "lucide-react";
 
 export default function PatientsRBACPage() {
   const [searchQuery, setSearchQuery] = useState("");
   const [users, setUsers] = useState<Profile[]>([]);
+  const [currentRole, setCurrentRole] = useState<UserRole | null>(null);
   const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
     let isMounted = true;
     const loadUsers = async () => {
       try {
-        const nextUsers = await listProfiles();
+        const [currentProfile, nextUsers] = await Promise.all([
+          getCurrentProfile(),
+          listProfiles(),
+        ]);
         if (isMounted) {
+          setCurrentRole(currentProfile?.role ?? null);
           setUsers(nextUsers);
           setErrorMessage("");
         }
@@ -53,6 +58,7 @@ export default function PatientsRBACPage() {
       u.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
       u.role.toLowerCase().includes(searchQuery.toLowerCase())
   );
+  const isAdmin = currentRole === "admin";
 
   return (
     <div className="space-y-8">
@@ -66,10 +72,12 @@ export default function PatientsRBACPage() {
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 bg-[#FCF8F2] p-6 rounded-3xl border border-[#064E3B]/15 shadow-sm">
         <div>
           <h1 className="font-heading text-2xl sm:text-3xl font-extrabold text-[#032D22]">
-            User Directory & RBAC Control
+            {isAdmin ? "User Directory & RBAC Control" : "Staff Directory"}
           </h1>
           <p className="text-xs sm:text-sm text-[#4A5D56] mt-1">
-            Manage user accounts and assign system permissions (`Admin`, `Clinician`, `Patient`).
+            {isAdmin
+              ? "Manage user accounts and assign system permissions (`Admin`, `Clinician`, `Patient`)."
+              : "View clinic user accounts and their current system roles."}
           </p>
         </div>
       </div>
@@ -130,7 +138,7 @@ export default function PatientsRBACPage() {
                 <th className="pb-3 px-3">Email</th>
                 <th className="pb-3 px-3">Current Role</th>
                 <th className="pb-3 px-3">Joined Date</th>
-                <th className="pb-3 px-3 text-right">Assign RBAC Role</th>
+                {isAdmin && <th className="pb-3 px-3 text-right">Assign RBAC Role</th>}
               </tr>
             </thead>
             <tbody className="divide-y divide-[#064E3B]/10">
@@ -156,17 +164,20 @@ export default function PatientsRBACPage() {
                     </Badge>
                   </td>
                   <td className="py-3 px-3 text-[#4A5D56]">{usr.created_at}</td>
-                  <td className="py-3 px-3 text-right">
-                    <select
-                      value={usr.role}
-                      onChange={(e) => handleRoleChange(usr.id, e.target.value as UserRole)}
-                      className="h-9 px-3 rounded-full border border-[#064E3B]/20 bg-white text-xs font-bold text-[#032D22] focus:outline-none focus:ring-2 focus:ring-[#064E3B]"
-                    >
-                      <option value="patient">Patient Role</option>
-                      <option value="clinician">Clinician Role</option>
-                      <option value="admin">Admin Role</option>
-                    </select>
-                  </td>
+                  {isAdmin && (
+                    <td className="py-3 px-3 text-right">
+                      <select
+                        value={usr.role}
+                        onChange={(e) => handleRoleChange(usr.id, e.target.value as UserRole)}
+                        aria-label={`Assign role for ${usr.full_name}`}
+                        className="h-9 px-3 rounded-full border border-[#064E3B]/20 bg-white text-xs font-bold text-[#032D22] focus:outline-none focus:ring-2 focus:ring-[#064E3B]"
+                      >
+                        <option value="patient">Patient Role</option>
+                        <option value="clinician">Clinician Role</option>
+                        <option value="admin">Admin Role</option>
+                      </select>
+                    </td>
+                  )}
                 </tr>
               ))}
             </tbody>
