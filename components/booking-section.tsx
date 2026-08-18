@@ -20,16 +20,23 @@ export function BookingSection() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!name || !phoneNum || !email) return;
+
+    const trimmedName = name.trim();
+    const trimmedPhone = phoneNum.trim();
+    const trimmedEmail = email.trim();
+    if (!trimmedName || !trimmedPhone || !trimmedEmail) {
+      setErrorMessage("Please complete your name, phone number, and email address.");
+      return;
+    }
 
     setIsSubmitting(true);
     setErrorMessage("");
 
     try {
       await createAppointment({
-        patient_name: name,
-        patient_phone: phoneNum,
-        patient_email: email,
+        patient_name: trimmedName,
+        patient_phone: trimmedPhone,
+        patient_email: trimmedEmail,
         service_title: selectedService,
         notes: symptoms || `Inline Form Request for ${selectedService}`,
       });
@@ -186,6 +193,9 @@ export function BookingSection() {
                     <Input
                       id="inline-name"
                       placeholder="e.g. Maria Santos"
+                      autoComplete="name"
+                      minLength={2}
+                      maxLength={120}
                       required
                       value={name}
                       onChange={(e) => setName(e.target.value)}
@@ -199,12 +209,15 @@ export function BookingSection() {
                         id="inline-phone"
                         type="tel"
                         placeholder="+63 9XX XXX XXXX"
-                        maxLength={13}
+                        inputMode="tel"
+                        autoComplete="tel"
+                        minLength={7}
+                        maxLength={32}
                         required
                         value={phoneNum}
                         onChange={(e) => {
                           const val = e.target.value;
-                          if (val.length <= 13) setPhoneNum(val);
+                          if (val.length <= 32) setPhoneNum(val);
                         }}
                       />
                     </div>
@@ -215,6 +228,8 @@ export function BookingSection() {
                         id="inline-email"
                         type="email"
                         placeholder="maria@example.com"
+                        autoComplete="email"
+                        maxLength={254}
                         required
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
@@ -227,6 +242,7 @@ export function BookingSection() {
                     <textarea
                       id="inline-symptoms"
                       rows={3}
+                      maxLength={2000}
                       value={symptoms}
                       onChange={(e) => setSymptoms(e.target.value)}
                       placeholder="Briefly describe your pain, injury, or therapy goals..."

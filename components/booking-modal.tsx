@@ -39,16 +39,23 @@ export function BookingModal({
 
   const handleSubmitIntake = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!fullName || !phone || !email) return;
+
+    const trimmedName = fullName.trim();
+    const trimmedPhone = phone.trim();
+    const trimmedEmail = email.trim();
+    if (!trimmedName || !trimmedPhone || !trimmedEmail) {
+      setErrorMessage("Please complete your name, phone number, and email address.");
+      return;
+    }
 
     setIsSubmitting(true);
     setErrorMessage("");
 
     try {
       await createAppointment({
-        patient_name: fullName,
-        patient_phone: phone,
-        patient_email: email,
+        patient_name: trimmedName,
+        patient_phone: trimmedPhone,
+        patient_email: trimmedEmail,
         service_title: serviceName,
         notes: `Requested via Landing Page Modal for ${serviceName}`,
       });
@@ -109,6 +116,9 @@ export function BookingModal({
               <Input
                 id="modal-name"
                 placeholder="e.g. Maria Santos"
+                autoComplete="name"
+                minLength={2}
+                maxLength={120}
                 required
                 value={fullName}
                 onChange={(e) => setFullName(e.target.value)}
@@ -122,12 +132,15 @@ export function BookingModal({
                   id="modal-phone"
                   type="tel"
                   placeholder="+63 9XX XXX XXXX"
-                  maxLength={13}
+                  inputMode="tel"
+                  autoComplete="tel"
+                  minLength={7}
+                  maxLength={32}
                   required
                   value={phone}
                   onChange={(e) => {
                     const value = e.target.value;
-                    if (value.length <= 13) setPhone(value);
+                    if (value.length <= 32) setPhone(value);
                   }}
                 />
               </div>
@@ -138,6 +151,8 @@ export function BookingModal({
                   id="modal-email"
                   type="email"
                   placeholder="maria@example.com"
+                  autoComplete="email"
+                  maxLength={254}
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
