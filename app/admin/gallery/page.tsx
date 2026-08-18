@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+import Image from "next/image";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -200,9 +201,11 @@ export default function StorageGalleryPage() {
         {filteredPhotos.map((photo) => (
           <Card key={photo.id} className="bg-[#FCF8F2] border border-[#064E3B]/15 overflow-hidden group">
             <div className="relative h-44 w-full overflow-hidden bg-black/5">
-              <img
+              <Image
                 src={photo.url}
                 alt={photo.name}
+                fill
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                 className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-300"
               />
               <span className="absolute top-2 left-2 text-[10px] font-bold uppercase bg-[#064E3B] text-white px-2.5 py-0.5 rounded-full shadow">

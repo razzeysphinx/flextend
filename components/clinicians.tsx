@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Award, CheckCircle, Users } from "lucide-react";
@@ -59,9 +60,11 @@ export function Clinicians() {
               className="bg-[#FCF8F2] border-2 border-[#064E3B]/10 overflow-hidden hover:border-[#064E3B]/30 hover:shadow-xl transition-all duration-300 group"
             >
               <div className="relative h-64 w-full overflow-hidden">
-                <img
+                <Image
                   src={member.image}
                   alt={member.name}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 33vw"
                   className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                   onError={(event) => {
                     const image = event.currentTarget;

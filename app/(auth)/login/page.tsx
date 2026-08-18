@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useState, Suspense } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
@@ -74,11 +75,12 @@ function LoginContent() {
       <div className="w-full max-w-md relative z-10">
         <div className="text-center mb-8">
           <div className="inline-flex items-center justify-center h-16 w-16 rounded-full border-2 border-[#C9A24B] bg-[#FCF8F2] shadow-md mb-3">
-            <img
+            <Image
               src="https://res.cloudinary.com/zylwakez/image/upload/v1784795283/FLEXTEND_plecil.png"
               alt="FlexTend Logo"
+              width={48}
+              height={48}
               className="h-12 w-12 rounded-full object-cover max-w-[48px] max-h-[48px]"
-              style={{ maxWidth: "48px", maxHeight: "48px" }}
             />
           </div>
           <h1 className="font-heading text-2xl font-extrabold text-[#032D22]">

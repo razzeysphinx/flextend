@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { ShieldCheck, Calendar, ArrowRight, Award, Clock, Star } from "lucide-react";
@@ -94,11 +95,13 @@ export function Hero({ onOpenBooking }: HeroProps) {
               <div className="absolute -inset-4 rounded-3xl bg-gradient-to-tr from-[#064E3B]/20 to-[#C9A24B]/30 blur-xl opacity-70" />
 
               {/* Main Banner Image Container */}
-              <div className="relative overflow-hidden rounded-3xl border-2 border-[#064E3B]/20 bg-[#FCF8F2] shadow-xl">
-                <img
+              <div className="relative h-[360px] sm:h-[440px] overflow-hidden rounded-3xl border-2 border-[#064E3B]/20 bg-[#FCF8F2] shadow-xl">
+                <Image
                   src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1000&q=80"
                   alt="Physical therapy rehabilitation clinician assisting patient at FlexTend"
-                  className="h-[360px] sm:h-[440px] w-full object-cover"
+                  fill
+                  sizes="(max-width: 640px) 100vw, 50vw"
+                  className="object-cover"
                 />
 
                 {/* Floating Badge Overlay 1 */}

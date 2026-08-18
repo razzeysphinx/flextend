@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
@@ -51,9 +52,11 @@ export function AdminSidebar() {
       <div>
         {/* Brand Header */}
         <div className="p-6 border-b border-[#064E3B] flex items-center gap-3">
-          <img
+          <Image
             src="https://res.cloudinary.com/zylwakez/image/upload/v1784795283/FLEXTEND_plecil.png"
             alt="FlexTend Logo"
+            width={40}
+            height={40}
             className="h-10 w-10 rounded-full border border-[#C9A24B] bg-white"
           />
           <div className="flex flex-col">

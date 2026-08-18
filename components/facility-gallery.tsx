@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -111,9 +112,11 @@ export function FacilityGallery() {
         <div className="relative mx-auto max-w-5xl overflow-hidden rounded-3xl border-2 border-[#064E3B]/20 bg-[#032D22] text-white shadow-2xl">
           {/* Main Slide Image */}
           <div className="relative h-[360px] sm:h-[480px] w-full overflow-hidden">
-            <img
+            <Image
               src={activeSlide.image}
               alt={activeSlide.title}
+              fill
+              sizes="(max-width: 640px) 100vw, 1024px"
               className="h-full w-full object-cover transition-all duration-700 ease-in-out"
             />
             {/* Gradient Overlay */}

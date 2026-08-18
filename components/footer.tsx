@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { MapPin, Phone, Mail, Clock } from "lucide-react";
 
@@ -10,9 +11,11 @@ export function Footer() {
           {/* Brand Info */}
           <div className="space-y-4">
             <div className="flex items-center gap-3">
-              <img
+              <Image
                 src="https://res.cloudinary.com/zylwakez/image/upload/v1784795283/FLEXTEND_plecil.png"
                 alt="FlexTend Physical Therapy Clinic Logo"
+                width={48}
+                height={48}
                 className="h-12 w-12 rounded-full border border-[#C9A24B]/40 bg-white"
               />
               <div className="flex flex-col">

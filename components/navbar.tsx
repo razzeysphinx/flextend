@@ -30,9 +30,11 @@ export function Navbar({ onOpenBooking }: NavbarProps) {
         {/* Brand Logo */}
         <Link href="#home" className="flex items-center gap-3 group">
           <div className="relative h-12 w-12 overflow-hidden rounded-full border border-[#C9A24B]/40 shadow-sm transition-transform duration-300 group-hover:scale-105">
-            <img
+            <Image
               src="https://res.cloudinary.com/zylwakez/image/upload/v1784795283/FLEXTEND_plecil.png"
               alt="FlexTend Physical Therapy Clinic Logo"
+              fill
+              sizes="48px"
               className="h-full w-full object-cover"
             />
           </div>
@@ -98,9 +100,11 @@ export function Navbar({ onOpenBooking }: NavbarProps) {
               <div>
                 <SheetHeader className="text-left border-b border-[#064E3B]/10 pb-4 mb-6">
                   <SheetTitle className="flex items-center gap-3">
-                    <img
+                    <Image
                       src="https://res.cloudinary.com/zylwakez/image/upload/v1784795283/FLEXTEND_plecil.png"
                       alt="FlexTend Logo"
+                      width={40}
+                      height={40}
                       className="h-10 w-10 rounded-full border border-[#C9A24B]/30"
                     />
                     <div className="flex flex-col">
