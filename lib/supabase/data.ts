@@ -26,7 +26,7 @@ function throwIfError(error: { message: string } | null, fallback: string): void
   }
 }
 
-export async function createAppointment(input: AppointmentInput): Promise<Appointment> {
+export async function createAppointment(input: AppointmentInput): Promise<void> {
   const supabase = createClient();
   const payload = {
     patient_name: input.patient_name.trim(),
@@ -38,18 +38,12 @@ export async function createAppointment(input: AppointmentInput): Promise<Appoin
     status: "pending" as const,
   };
 
-  const { data, error } = await supabase
-    .from("appointments")
-    .insert(payload)
-    .select(APPOINTMENT_COLUMNS)
-    .single();
+  // Public visitors may create appointment requests but must not be able to
+  // read appointment rows. Requesting the inserted row with `.select()` would
+  // require an anonymous SELECT policy and cause the insert to fail under RLS.
+  const { error } = await supabase.from("appointments").insert(payload);
 
   throwIfError(error, "Unable to submit the intake request.");
-  if (!data) {
-    throw new Error("The intake request was not created.");
-  }
-
-  return data as Appointment;
 }
 
 export async function listAppointments(): Promise<Appointment[]> {
