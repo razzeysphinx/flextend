@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Outfit, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
+
 const outfit = Outfit({
   subsets: ["latin"],
   variable: "--font-outfit",
@@ -15,9 +17,32 @@ const jakarta = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "FlexTend Physical Therapy Clinic — Lipa City, Batangas",
+  metadataBase: siteUrl ? new URL(siteUrl) : undefined,
+  title: {
+    default: "FlexTend Physical Therapy Clinic | Lipa City, Batangas",
+    template: "%s | FlexTend",
+  },
   description:
-    "FlexTend Physical Therapy & Occupational Therapy Clinic in Lipa City, Batangas. Evidence-based care, licensed clinicians, new patients seen within 48 hours.",
+    "FlexTend Physical Therapy and Occupational Therapy Clinic in Lipa City, Batangas. Explore rehabilitation services, patient education, and appointment information.",
+  ...(siteUrl
+    ? {
+        alternates: { canonical: "/" },
+      }
+    : {}),
+  openGraph: {
+    type: "website",
+    locale: "en_PH",
+    siteName: "FlexTend Physical Therapy Clinic",
+    title: "FlexTend Physical Therapy Clinic | Lipa City, Batangas",
+    description:
+      "Physical therapy, occupational therapy, and rehabilitation information in Lipa City, Batangas.",
+  },
+  twitter: {
+    card: "summary",
+    title: "FlexTend Physical Therapy Clinic | Lipa City, Batangas",
+    description:
+      "Physical therapy, occupational therapy, and rehabilitation information in Lipa City, Batangas.",
+  },
   keywords: [
     "Physical Therapy Lipa City",
     "Occupational Therapy Batangas",
@@ -31,6 +56,7 @@ export const metadata: Metadata = {
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "PhysicalTherapy",
+  ...(siteUrl ? { url: siteUrl } : {}),
   name: "FlexTend Physical Therapy Clinic",
   description:
     "Evidence-based physical and occupational therapy in Lipa City, Batangas by licensed clinicians.",

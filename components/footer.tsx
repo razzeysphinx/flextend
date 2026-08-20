@@ -59,11 +59,6 @@ export function Footer() {
                 </a>
               </li>
               <li>
-                <a href="#team" className="hover:text-[#C9A24B] transition-colors">
-                  Our Clinicians
-                </a>
-              </li>
-              <li>
                 <a href="#faq" className="hover:text-[#C9A24B] transition-colors">
                   FAQ
                 </a>

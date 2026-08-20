@@ -66,3 +66,130 @@ Enhance and fix the mobile responsiveness of the **FlexTend Physical Therapy Cli
    - Verify inline booking form and modal form inputs on mobile.
 4. **Carousel Touch & Buttons Test**:
    - Verify carousel buttons and indicator dots scale cleanly without obscuring text on small mobile screens.
+
+---
+
+## Phase 2.0 — Front-End Scale-Up, Content Refresh & SEO
+
+The backend functionality is considered complete. This phase focuses on improving the public-facing website, strengthening patient trust, and expanding organic search reach without changing the existing booking, authentication, storage, or RLS functionality.
+
+### 2.0.1 Content and Asset Approval
+
+Collect and approve the source-of-truth content before implementation:
+
+- Final hero, service, gallery, and clinician photos.
+- Clinician names, biographies, and photos are intentionally excluded from the public website for privacy.
+- The final list of services actually offered by the clinic.
+- Real, current reviews with source, date, and permission to publish.
+- Confirmed address, phone, email, opening hours, and service area.
+- Final brand wording and preferred language.
+
+Do not publish invented names, credentials, reviews, patient outcomes, or unverified statistics.
+
+### 2.0.2 Reusable Front-End Content Model
+
+Move public-facing content into typed, reusable data modules so the UI and SEO pages share one approved source of truth:
+
+- `content/site.ts`
+- `content/services.ts`
+- `content/clinicians.ts`
+- `content/reviews.ts`
+- `content/faqs.ts`
+- `content/conditions.ts`
+- `content/media.ts`
+
+Media records should include stable URLs, alt text, category, dimensions/aspect ratio, and ownership or credit information where applicable.
+
+### 2.0.3 Homepage and Conversion Improvements
+
+Refresh the public homepage in this order:
+
+1. Replace the hero image and strengthen the value proposition and appointment CTA.
+2. Reorganize services by orthopedic, neurological, pediatric, pain/mobility, and occupational therapy categories.
+3. Rebuild the interactive body map with accessible labels, keyboard navigation, mobile touch controls, a list fallback, and links to relevant services or condition pages.
+4. Keep the public clinician/profile section removed until the clinic explicitly approves its return.
+5. Replace placeholder reviews with real, permission-approved reviews or an anonymous aggregate Google review summary.
+6. Add practical patient FAQs covering appointments, therapy duration, preparation, payment, home exercises, pediatric care, and post-surgery rehabilitation.
+
+The body map must remain educational and must not present itself as a diagnostic tool.
+
+### 2.0.4 SEO Condition Page System
+
+Create a reusable condition-page system:
+
+- `/conditions`
+- `/conditions/[slug]`
+
+Each page must include:
+
+- Unique title and meta description.
+- One clear H1 and patient-friendly introduction.
+- Symptoms.
+- Causes.
+- Diagnosis.
+- Treatment and rehabilitation support.
+- Benefits.
+- Recovery timeline with a clear variability disclaimer.
+- Related services and internal links.
+- FAQs where useful.
+- Book Appointment CTA using the existing booking flow.
+- Medical-information disclaimer and last-reviewed date.
+- Breadcrumb navigation.
+
+Condition pages must be educational, not diagnostic or prescriptive. All medical content requires review and approval by an appropriately licensed clinician before publication.
+
+### 2.0.5 Initial Condition URL Map
+
+Create the following pages:
+
+- `/conditions/fracture-rehabilitation`
+- `/conditions/hip-replacement-rehabilitation`
+- `/conditions/frozen-shoulder`
+- `/conditions/arthritis-rehabilitation`
+- `/conditions/hip-knee-back-pain`
+- `/conditions/scoliosis`
+- `/conditions/generalized-body-weakness`
+- `/conditions/myofascial-pain-syndrome`
+- `/conditions/bells-palsy`
+- `/conditions/stroke-rehabilitation`
+- `/conditions/spinal-cord-injury`
+- `/conditions/traumatic-brain-injury`
+- `/conditions/parkinsons-disease`
+- `/conditions/progressive-supranuclear-palsy`
+- `/conditions/multiple-sclerosis`
+- `/conditions/guillain-barre-syndrome`
+- `/conditions/amyotrophic-lateral-sclerosis`
+- `/conditions/cerebral-palsy`
+- `/conditions/global-developmental-delay`
+
+Total and partial hip replacement rehabilitation will initially share one comprehensive page. Parkinson’s disease and progressive supranuclear palsy will have separate pages because they require distinct, condition-specific information.
+
+Build and approve one complete pilot page first, then reuse the approved template for the remaining pages. Avoid thin or near-duplicate pages.
+
+### 2.0.6 Technical SEO Foundation
+
+Implement:
+
+- Page-specific metadata and canonical URLs.
+- `metadataBase`, Open Graph, and social preview data.
+- `sitemap.ts` containing all public condition routes.
+- `robots.ts`.
+- Breadcrumb structured data.
+- Appropriate medical-condition structured data.
+- FAQ structured data only for visible, accurate FAQs.
+- Internal links between services, conditions, clinicians, FAQs, and booking.
+- Search Console submission after deployment.
+
+### 2.0.7 Phase 2.0 Verification
+
+Before release, verify:
+
+1. All images load correctly, have meaningful alt text, and do not cause layout shifts.
+2. Homepage and condition-page CTAs open the working booking flow.
+3. Body map works with mouse, keyboard, touch, and the mobile fallback list.
+4. The public clinician section and clinician images remain removed for privacy.
+5. Services, reviews, business information, and medical content are approved.
+6. Every condition page has unique metadata, a canonical URL, an H1, all required sections, internal links, a disclaimer, and a booking CTA.
+7. No broken links, placeholder content, fabricated claims, or duplicate pages remain.
+8. Mobile, accessibility, performance, sitemap, robots, and structured-data checks pass.
+9. `npm run lint`, `npx tsc --noEmit`, and `npm run build` pass successfully.

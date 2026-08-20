@@ -7,7 +7,6 @@ import { Features } from "@/components/features";
 import { Services } from "@/components/services";
 import { BodyMap } from "@/components/body-map";
 import { FacilityGallery } from "@/components/facility-gallery";
-import { Clinicians } from "@/components/clinicians";
 import { Testimonials } from "@/components/testimonials";
 import { FAQ } from "@/components/faq";
 import { BookingSection } from "@/components/booking-section";
@@ -37,7 +36,6 @@ export default function Home() {
         <Services onOpenBooking={handleOpenBooking} />
         <BodyMap onOpenBooking={handleOpenBooking} />
         <FacilityGallery />
-        <Clinicians />
         <Testimonials />
         <FAQ />
         <BookingSection />
